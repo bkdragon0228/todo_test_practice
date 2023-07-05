@@ -4,6 +4,7 @@ import { ITask } from '../../../fixtures/tasks'
 
 interface ITodoProps {
     tasks : ITask[]
+    handleClickSubmit : (value : string) => void;
 }
 
 const Todo : React.FC<ITodoProps> = ({
