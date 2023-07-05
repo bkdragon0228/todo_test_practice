@@ -10,6 +10,9 @@ const Todo : React.FC<ITodoProps> = ({
     tasks
 }) => {
 
+    if(!tasks.length) {
+        return <div>할 일 없음</div>
+    }
     return (
         <div>
 

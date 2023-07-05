@@ -6,12 +6,12 @@ import Todo from '../../src/components/todo/todo'
 
 
 describe('todo', () => {
-
     const renderTodo = (tasks : ITask[]) =>
         render(
-        <Todo
-            tasks={tasks}
-        />)
+            <Todo
+                tasks={tasks}
+            />
+        )
 
     context('할 일 목록이 없다면', () => {
         it('할 일 없음이 화면에 보여야한다.', () => {
