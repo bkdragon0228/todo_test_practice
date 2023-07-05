@@ -15,7 +15,14 @@ const Todo : React.FC<ITodoProps> = ({
     }
     return (
         <div>
-
+            {
+                tasks.map(({id, title}) => (
+                    <div key={id}>
+                        <input type='checkbox' />
+                        <p>{title}</p>
+                    </div>
+                ))
+            }
         </div>
     );
 };

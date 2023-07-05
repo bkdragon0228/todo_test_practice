@@ -25,7 +25,7 @@ describe('todo', () => {
         it('할 일이 화면에 보여야한다', () => {
             renderTodo(tasks)
             const checkBoxs = screen.getAllByRole('checkbox')
-            expect(checkBoxs.length).toBeGreaterThan(2)
+            expect(checkBoxs.length).toBe(2)
         })
     })
 
