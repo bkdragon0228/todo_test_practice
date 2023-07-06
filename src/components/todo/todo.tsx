@@ -5,33 +5,15 @@ import TodoItem from './todoItem';
 
 interface ITodoProps {
     tasks : ITask[];
-    handleClickSubmit : () => void;
-    handleChange : (value : string) => void;
     handleCheckBox : (id : number) => void;
 }
 
 const Todo : React.FC<ITodoProps> = ({
     tasks,
-    handleChange,
-    handleClickSubmit,
     handleCheckBox
 }) => {
-
     return (
         <div>
-             <div>
-                <input
-                    type='text'
-                    placeholder='contents'
-                    data-testid='todo-input'
-                    onChange={(e) => handleChange(e.target.value)}
-                />
-                <button
-                    onClick={handleClickSubmit}
-                >
-                    등록
-                </button>
-            </div>
             {
                 !tasks.length ? (
                     <div>

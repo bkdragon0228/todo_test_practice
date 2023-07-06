@@ -2,25 +2,21 @@ import React, { useState } from 'react';
 import { ITask } from '../../../fixtures/tasks';
 
 import Todo from './todo';
+import TodoForm from './todoForm';
 
 const TodoContainer = () => {
-    const [tasks, setTasks] = useState<ITask[]>([])
-    const [content, setContent] = useState<string>('')
+    const [tasks, setTasks] = useState<ITask[]>([]) // 실제론 api 통신을 통해 얻을 것.
 
-    const handleChangeContent = (value : string) => {
-      setContent(value)
+    const showError = () => {
+      console.error('할 일을 입력해주세요.')
     }
 
-    const handleClickSubmit = () => {
-      if(content === '') {
-        console.error('할 일을 입력해주세요.')
-      } else {
-        setTasks((prev) => [...prev, {
-          id : Math.random(),
-          title : content,
-          done : false
-        }])
-      }
+    const handleClickSubmit = (value : string) => {
+      setTasks((prev) => [...prev, {
+        id : Math.random(),
+        title : value,
+        done : false
+      }])
     }
 
     const handleCheckBox = (id : number) => {
@@ -33,13 +29,16 @@ const TodoContainer = () => {
           done : !item[0].done
         }])
     }
+
     return (
       <div>
             <h2>할 일</h2>
+            <TodoForm
+              showError={showError}
+              handleSubmit={handleClickSubmit}
+            />
             <Todo
-              handleClickSubmit={handleClickSubmit}
               tasks={tasks}
-              handleChange={handleChangeContent}
               handleCheckBox={handleCheckBox}
             />
       </div>
