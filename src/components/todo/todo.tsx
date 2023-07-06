@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ITask } from '../../../fixtures/tasks'
+import TodoItem from './todoItem';
 
 interface ITodoProps {
     tasks : ITask[];
@@ -38,10 +39,10 @@ const Todo : React.FC<ITodoProps> = ({
                     <div>
                     {
                         tasks.map(({id, title}) => (
-                            <div key={id}>
-                                <input type='checkbox' />
-                                <p>{title}</p>
-                            </div>
+                            <TodoItem
+                                key={id}
+                                title={title}
+                            />
                         ))
                     }
                 </div>
