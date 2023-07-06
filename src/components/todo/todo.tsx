@@ -7,12 +7,14 @@ interface ITodoProps {
     tasks : ITask[];
     handleClickSubmit : () => void;
     handleChange : (value : string) => void;
+    handleCheckBox : (id : number) => void;
 }
 
 const Todo : React.FC<ITodoProps> = ({
     tasks,
     handleChange,
     handleClickSubmit,
+    handleCheckBox
 }) => {
 
     return (
@@ -38,10 +40,13 @@ const Todo : React.FC<ITodoProps> = ({
                 ) : (
                     <div>
                     {
-                        tasks.map(({id, title}) => (
+                        tasks.map((props) => (
                             <TodoItem
-                                key={id}
-                                title={title}
+                                key={props.id}
+                                title={props.title}
+                                done={props.done}
+                                id={props.id}
+                                handleCheckBox={handleCheckBox}
                             />
                         ))
                     }

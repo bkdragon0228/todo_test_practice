@@ -17,11 +17,22 @@ const TodoContainer = () => {
       } else {
         setTasks((prev) => [...prev, {
           id : Math.random(),
-          title : content
+          title : content,
+          done : false
         }])
       }
     }
 
+    const handleCheckBox = (id : number) => {
+        const item = tasks.filter((task) => task.id === id)
+        const filterd = tasks.filter((tasks) => tasks.id !== id)
+
+        setTasks([...filterd, {
+          id : item[0].id,
+          title : item[0].title,
+          done : !item[0].done
+        }])
+    }
     return (
       <div>
             <h2>할 일</h2>
@@ -29,6 +40,7 @@ const TodoContainer = () => {
               handleClickSubmit={handleClickSubmit}
               tasks={tasks}
               handleChange={handleChangeContent}
+              handleCheckBox={handleCheckBox}
             />
       </div>
     );

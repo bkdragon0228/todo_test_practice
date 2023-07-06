@@ -10,6 +10,7 @@ describe('todo', () => {
     const sampleText = 'sample'
     const handleChange = jest.fn()
     const handleClickSubmit = jest.fn()
+    const handleCheckbox = jest.fn()
     const consoleErrorSpy = jest.spyOn(global.console, 'error')
 
     const renderTodo = (tasks : ITask[]) =>
@@ -18,6 +19,7 @@ describe('todo', () => {
                 tasks={tasks}
                 handleClickSubmit={handleClickSubmit}
                 handleChange={handleChange}
+                handleCheckBox={handleCheckbox}
             />
         )
 
