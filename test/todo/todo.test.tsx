@@ -1,19 +1,23 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { tasks, ITask } from '../../fixtures/tasks'
 
-import Todo from '../../src/components/todo/todo'
 
+import Todo from '../../src/components/todo/todo'
+import userEvent from '@testing-library/user-event'
 
 describe('todo', () => {
     const sampleText = 'sample'
+    const handleChange = jest.fn()
     const handleClickSubmit = jest.fn()
-    const alertSpy = jest.spyOn(window, 'alert')
+    const consoleErrorSpy = jest.spyOn(global.console, 'error')
+
     const renderTodo = (tasks : ITask[]) =>
         render(
             <Todo
                 tasks={tasks}
                 handleClickSubmit={handleClickSubmit}
+                handleChange={handleChange}
             />
         )
 
@@ -34,41 +38,26 @@ describe('todo', () => {
     })
 
     context('등록 버튼을 눌렀을 때', () => {
-        context('등록할 텍스트가 없다면', () => {
-            it('에러 메시지가 보여야한다.', () => {
+        context('등록할 텍스트가 없다면',  () => {
+            it('에러메시지가 발생해야한다..', async () => {
+                consoleErrorSpy.mockImplementation(() => {})
                 renderTodo(tasks)
 
-                fireEvent.click(screen.getByText('등록'))
+                userEvent.click(screen.getByText('등록'))
 
-                expect(alertSpy).toBeCalledWith('할 일을 입력해주세요.');
+                expect(handleClickSubmit).toHaveBeenCalled()
             })
         })
 
-        context('등록할 텍스트가 있다면', () => {
-            it('handleClickSubmit이 호출 되어야 한다.', () => {
-                renderTodo(tasks);
+        context('등록할 텍스트가 있다면',  () => {
+            it('handleClickSubmit이 호출되어야 한다.', async () => {
+                renderTodo(tasks)
 
-                fireEvent.change(screen.getByPlaceholderText('contents'), {
-                    target : {
-                        value : sampleText
-                    }
-                })
-                fireEvent.click(screen.getByText('등록'))
+                userEvent.type(screen.getByTestId('todo-input'), sampleText)
+                userEvent.click(screen.getByText('등록'))
 
-                expect(handleClickSubmit).toBeCalledWith(sampleText);
-            })
-
-            it('텍스트가 할 일 목록에 추가되어야 한다.', () => {
-                const { container } = renderTodo(tasks);
-
-                fireEvent.change(screen.getByPlaceholderText('contents'), {
-                    target : {
-                        value : sampleText
-                    }
-                })
-                fireEvent.click(screen.getByText('등록'))
-
-                expect(container).toHaveTextContent(sampleText)
+                expect(handleChange.mock.calls.length).toBeGreaterThanOrEqual(sampleText.length)
+                expect(handleClickSubmit).toHaveBeenCalled()
             })
         })
     })

@@ -4,7 +4,7 @@
   "moduleNameMapper": {
       "\\.(css|less|svg)$": "identity-obj-proxy"
   },
-  "setupFilesAfterEnv": ["<rootDir>/test/setup.ts", "jest-plugin-context/setup"],
+  "setupFilesAfterEnv": ["<rootDir>/test/setup.ts", "jest-plugin-context/setup", "jest-mock-console/dist/setupTestFramework.js"],
   "transform": {
       "^.+\\.tsx?$": "ts-jest"
   }
