@@ -44,6 +44,17 @@ describe('todoitem', () => {
         expect(checkboxs.length).toBeGreaterThanOrEqual(1)
     })
 
+    it('삭제 버튼이 보여야한다.', () => {
+        renderTodoItem({
+            done : false,
+            id : Math.random(),
+            title : sampleTitle
+        })
+
+        const deleteButton = screen.getAllByLabelText('삭제')
+        expect(deleteButton.length).toBeGreaterThanOrEqual(1)
+    })
+
     context('체크 박스를 클릭하면', () => {
         it('handleCheckBox가 호출 되어야 한다..', () => {
             renderTodoItem({
@@ -67,6 +78,23 @@ describe('todoitem', () => {
             })
 
             expect(screen.getByText(sampleTitle)).toHaveStyle('text-decoration: line-through;')
+        })
+    })
+
+    context('삭제 버튼을 클릭하면', () => {
+        it('handleDelete 함수가 호출 되어야 한다.', () => {
+            renderTodoItem({
+                done : false,
+                id : sampleId,
+                title : sampleTitle
+            })
+
+            const deleteButton = screen.getAllByLabelText('삭제')
+
+            userEvent.click(deleteButton[0])
+
+            expect(handleDelete).toHaveBeenCalled()
+            handleDelete.mockRestore()
         })
     })
 })
