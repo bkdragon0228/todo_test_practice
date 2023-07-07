@@ -3,16 +3,19 @@ import { ITask } from '../../../fixtures/tasks';
 
 import Todo from './todo';
 import TodoForm from './todoForm';
+import useFetchData from '../../hooks/useFetchData';
 
 const TodoContainer = () => {
-    const [tasks, setTasks] = useState<ITask[]>([]) // 실제론 api 통신을 통해 얻을 것.
+    // const [tasks, setTasks] = useState<ITask[]>([]) // 실제론 api 통신을 통해 얻을 것.
+
+    const [data, setData] = useFetchData<ITask[]>([])
 
     const showError = () => {
       console.error('할 일을 입력해주세요.')
     }
 
     const handleClickSubmit = (value : string) => {
-      setTasks((prev) => [...prev, {
+      setData((prev) => [...prev, {
         id : Math.random(),
         title : value,
         done : false
@@ -20,10 +23,10 @@ const TodoContainer = () => {
     }
 
     const handleCheckBox = (id : number) => {
-        const item = tasks.filter((task) => task.id === id)
-        const filterd = tasks.filter((tasks) => tasks.id !== id)
+        const item = data.filter((task) => task.id === id)
+        const filterd = data.filter((tasks) => tasks.id !== id)
 
-        setTasks([...filterd, {
+        setData([...filterd, {
           id : item[0].id,
           title : item[0].title,
           done : !item[0].done
@@ -31,7 +34,7 @@ const TodoContainer = () => {
     }
 
     const handleDelete = (id : number) => {
-      setTasks((prev) => [
+      setData((prev) => [
         ...prev.filter((task) => task.id !== id)
       ])
     }
@@ -43,7 +46,7 @@ const TodoContainer = () => {
               handleSubmit={handleClickSubmit}
             />
             <Todo
-              tasks={tasks}
+              tasks={data}
               handleCheckBox={handleCheckBox}
               handleDelete={handleDelete}
             />

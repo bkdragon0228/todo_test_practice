@@ -17,7 +17,7 @@ const Todo : React.FC<ITodoProps> = ({
     return (
         <div>
             {
-                !tasks.length ? (
+                !tasks?.length ? (
                     <div>
                         할 일 없음
                     </div>
