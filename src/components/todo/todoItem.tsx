@@ -1,11 +1,17 @@
 import React from 'react';
 import { ITask } from '../../../fixtures/tasks';
 
-const TodoItem : React.FC<ITask & {handleCheckBox : (id : number) => void}> = ({
+type TodoItemProps = ITask & {
+    handleCheckBox : (id : number) => void;
+    handleDelete : (id : number) => void;
+}
+
+const TodoItem : React.FC<TodoItemProps> = ({
     title,
     id,
     done,
-    handleCheckBox
+    handleCheckBox,
+    handleDelete
 }) => {
     return (
         <div style={{
@@ -22,6 +28,11 @@ const TodoItem : React.FC<ITask & {handleCheckBox : (id : number) => void}> = ({
             >
                 {title}
             </div>
+            <button
+                onClick={() => handleDelete(id)}
+                >
+                    삭제
+                </button>
         </div>
     );
 };

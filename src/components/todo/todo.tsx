@@ -6,11 +6,13 @@ import TodoItem from './todoItem';
 interface ITodoProps {
     tasks : ITask[];
     handleCheckBox : (id : number) => void;
+    handleDelete : (id : number) => void;
 }
 
 const Todo : React.FC<ITodoProps> = ({
     tasks,
-    handleCheckBox
+    handleCheckBox,
+    handleDelete
 }) => {
     return (
         <div>
@@ -29,6 +31,7 @@ const Todo : React.FC<ITodoProps> = ({
                                 done={props.done}
                                 id={props.id}
                                 handleCheckBox={handleCheckBox}
+                                handleDelete={handleDelete}
                             />
                         ))
                     }

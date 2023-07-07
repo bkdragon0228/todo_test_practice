@@ -30,6 +30,11 @@ const TodoContainer = () => {
         }])
     }
 
+    const handleDelete = (id : number) => {
+      setTasks((prev) => [
+        ...prev.filter((task) => task.id !== id)
+      ])
+    }
     return (
       <div>
             <h2>할 일</h2>
@@ -40,6 +45,7 @@ const TodoContainer = () => {
             <Todo
               tasks={tasks}
               handleCheckBox={handleCheckBox}
+              handleDelete={handleDelete}
             />
       </div>
     );

@@ -10,6 +10,7 @@ describe('todoitem', () => {
     const sampleTitle = 'sample'
     const sampleId = Math.random()
     const handleCheckBox = jest.fn()
+    const handleDelete = jest.fn()
 
     const renderTodoItem = ({
         title,
@@ -22,6 +23,7 @@ describe('todoitem', () => {
                 id={id}
                 done={done}
                 handleCheckBox={handleCheckBox}
+                handleDelete={handleDelete}
             />
         )
 
@@ -51,7 +53,7 @@ describe('todoitem', () => {
             title : sampleTitle
         })
 
-        const deleteButton = screen.getAllByLabelText('삭제')
+        const deleteButton = screen.getAllByText('삭제')
         expect(deleteButton.length).toBeGreaterThanOrEqual(1)
     })
 
@@ -89,7 +91,7 @@ describe('todoitem', () => {
                 title : sampleTitle
             })
 
-            const deleteButton = screen.getAllByLabelText('삭제')
+            const deleteButton = screen.getAllByText('삭제')
 
             userEvent.click(deleteButton[0])
 

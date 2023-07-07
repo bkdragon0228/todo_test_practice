@@ -6,12 +6,14 @@ import Todo from '../../src/components/todo/todo'
 
 describe('todo', () => {
     const handleCheckbox = jest.fn()
+    const handleDelete = jest.fn()
 
     const renderTodo = (tasks : ITask[]) =>
         render(
             <Todo
                 tasks={tasks}
                 handleCheckBox={handleCheckbox}
+                handleDelete={handleDelete}
             />
         )
 
