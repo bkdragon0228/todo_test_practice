@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen, getAllByText, queryByText } from '@testing-library/react';
 import { server } from '../../src/mocks/server'
 import { rest } from 'msw';
 
@@ -94,6 +94,39 @@ describe('todoContainer', () => {
                 await waitFor(() => {
                     expect(newTask).toBe(null)
                 })
+            })
+        })
+    })
+
+    context('데이터를 삭제하는 api를 발생시킬 떄', () => {
+        context('데이터 삭제에 성공했다면', () => {
+            it('삭제한 데이터가 화면에 없어야 한다.', async () => {
+                renderTodoContainer()
+
+                const button = screen.getAllByText('삭제')
+                userEvent.click(button[0])
+
+                const deleteTask = screen.queryByText('자기')
+
+                expect(deleteTask).toBeNull()
+            })
+        })
+
+        context('데이터 삭제에 실패했다면', () => {
+            it('데이터가 변경되지 않아야 한다.', () => {
+                server.use(
+                    rest.delete('https://localhost:3000/tasks/:taskid', (_, res, ctx) => {
+                        return res(ctx.status(400))
+                    })
+                )
+                renderTodoContainer()
+
+                const button = screen.getAllByText('삭제')
+                userEvent.click(button[0])
+
+                const deleteTask = screen.queryByText('자기')
+
+                expect(deleteTask).not.toBeNull()
             })
         })
     })
