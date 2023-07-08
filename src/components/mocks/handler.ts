@@ -12,17 +12,12 @@ export const tasks = [
   ] satisfies ITask[]
 
 
-const getTasks = (isError? : boolean) => {
-    return rest.get<ITask>('/tasks', (_, res, ctx) => {
-
-        if(isError) {
-            return res(ctx.status(500))
-        }
+const getTasks = () => {
+    return rest.get<ITask>('https://localhost:3000/tasks', (_, res, ctx) => {
 
         return res(ctx.status(200), ctx.json(tasks))
     })
 }
-
 
 const tasksHandlers = [getTasks()]
 

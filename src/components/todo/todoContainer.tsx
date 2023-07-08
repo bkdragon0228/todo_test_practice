@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ITask } from '../../../fixtures/tasks';
 
 import Todo from './todo';
@@ -6,9 +6,7 @@ import TodoForm from './todoForm';
 import useFetchData from '../../hooks/useFetchData';
 
 const TodoContainer = () => {
-    // const [tasks, setTasks] = useState<ITask[]>([]) // 실제론 api 통신을 통해 얻을 것.
-
-    const [data, setData] = useFetchData<ITask[]>([])
+    const [data, setData, isError] = useFetchData<ITask[]>([])
 
     const showError = () => {
       console.error('할 일을 입력해주세요.')
@@ -38,6 +36,13 @@ const TodoContainer = () => {
         ...prev.filter((task) => task.id !== id)
       ])
     }
+
+    if(isError) {
+      return (
+        <div data-testid='errorMessage'>Network error</div>
+      )
+    }
+
     return (
       <div>
             <h2>할 일</h2>

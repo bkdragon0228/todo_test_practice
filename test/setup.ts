@@ -3,8 +3,8 @@ import "@testing-library/jest-dom";
 
 import { server } from '../src/mocks/server'
 
-beforeAll(() => server.listen()) // 서버 설정
+beforeAll(() => server.listen())
 
-afterEach(() => server.resetHandlers()) // 각각 테스트 요청 마다 핸들러 초기화
+afterEach(() => server.resetHandlers())
 
-afterAll(() => server.close()) // 테스트가 끝난 후 종료
+afterAll(() => server.close())
