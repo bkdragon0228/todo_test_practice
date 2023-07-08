@@ -4,6 +4,9 @@ import { ITask } from '../../../fixtures/tasks';
 import Todo from './todo';
 import TodoForm from './todoForm';
 import useFetchData from '../../hooks/useFetchData';
+import axios from 'axios';
+import { json } from 'stream/consumers';
+import { r } from 'msw/lib/glossary-de6278a9';
 
 const TodoContainer = () => {
     const [data, setData, isError] = useFetchData<ITask[]>([])
@@ -12,12 +15,27 @@ const TodoContainer = () => {
       console.error('할 일을 입력해주세요.')
     }
 
-    const handleClickSubmit = (value : string) => {
-      setData((prev) => [...prev, {
+    const handleClickSubmit = async (value : string) => {
+      const newTask : ITask = {
         id : Math.random(),
         title : value,
         done : false
-      }])
+      }
+      try {
+        const response = await axios.post("https://localhost:3000/tasks", {
+          headers : {
+            'Content-Type': 'application/json'
+          },
+          body : {
+            task : JSON.stringify(newTask)
+          }
+        })
+
+        const result = await response.data
+        setData(result)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     const handleCheckBox = (id : number) => {

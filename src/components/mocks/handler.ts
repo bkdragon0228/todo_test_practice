@@ -19,6 +19,14 @@ const getTasks = () => {
     })
 }
 
-const tasksHandlers = [getTasks()]
+const addTask = () => {
+    return rest.post('https://localhost:3000/tasks', async (req, res, ctx) => {
+        const { task } = await req.json()
+
+        return res(ctx.status(200), ctx.json([...tasks, task]))
+    })
+}
+
+const tasksHandlers = [getTasks(), addTask()]
 
 export default tasksHandlers
