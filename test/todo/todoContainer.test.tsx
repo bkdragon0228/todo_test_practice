@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen , act} from '@testing-library/react';
 import { server } from '../../src/mocks/server'
 import { rest } from 'msw';
 
@@ -14,12 +14,11 @@ describe('todoContainer', () => {
             <TodoContainer />
         )
 
+
     it('title이 보여야한다.', async () => {
         const { container } = renderTodoContainer()
 
-        await waitFor(() => {
-            expect(container).toHaveTextContent('할 일')
-        })
+        expect(container).toHaveTextContent('할 일')
     })
 
     context('데이터를 불러오는 api 호출을 할 때', () => {
@@ -60,8 +59,8 @@ describe('todoContainer', () => {
             it('추가된 데이터가 화면에 렌더링 되어야 한다.', async () => {
                 renderTodoContainer()
 
-                const input = screen.getByTestId('todo-input')
-                const button = screen.getByText('등록')
+                const input = await screen.findByTestId('todo-input')
+                const button = await screen.findByText('등록')
 
                 userEvent.type(input, 'sample')
                 userEvent.click(button)
@@ -70,29 +69,26 @@ describe('todoContainer', () => {
                 await waitFor(() => {
                     expect(newTask).toBeInTheDocument()
                 })
-
             })
         })
 
         context('에러가 발생했다면', () => {
             it('추가된 데이터가 없어야 한다.', async () => {
                 server.use(
-                    rest.post('https://localhost:3000/tasks', (_, res, ctx) => {
+                    rest.post('https://localhost:3000/tasks', async (_, res, ctx) => {
                         return res(ctx.status(400))
                     })
                 )
                 renderTodoContainer()
 
-                const input = screen.getByTestId('todo-input')
-                const button = screen.getByText('등록')
+                const input = await screen.findByTestId('todo-input')
+                const button = await screen.findByText('등록')
 
                 userEvent.type(input, 'sample')
                 userEvent.click(button)
 
-                const newTask = screen.queryByText('sample')
-
                 await waitFor(() => {
-                    expect(newTask).toBe(null)
+                    expect(screen.queryByText('sample')).toBe(null)
                 })
             })
         })
@@ -106,9 +102,10 @@ describe('todoContainer', () => {
                 const button = await screen.findAllByText('삭제')
                 userEvent.click(button[0])
 
-                const deleteTask = screen.queryByText('자기')
-
-                expect(deleteTask).toBeNull()
+                const deleteTask = await screen.findByText('자기')
+                await waitFor(() => {
+                    expect(deleteTask).not.toBeInTheDocument()
+                })
             })
         })
 
@@ -122,12 +119,12 @@ describe('todoContainer', () => {
                 renderTodoContainer()
 
                 const button = await screen.findAllByText('삭제')
-
                 userEvent.click(button[0])
 
-                const deleteTask = screen.queryByText('자기')
-
-                expect(deleteTask).not.toBeNull()
+                const deleteTask = await screen.findByText('자기')
+                await waitFor(() => {
+                    expect(deleteTask).toBeInTheDocument()
+                })
             })
         })
     })

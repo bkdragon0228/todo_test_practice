@@ -32,7 +32,7 @@ const TodoItem : React.FC<TodoItemProps> = ({
                 onClick={() => handleDelete(id)}
                 >
                     삭제
-                </button>
+            </button>
         </div>
     );
 };

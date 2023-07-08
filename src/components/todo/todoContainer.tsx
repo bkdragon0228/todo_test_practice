@@ -47,10 +47,15 @@ const TodoContainer = () => {
         }])
     }
 
-    const handleDelete = (id : number) => {
-      setData((prev) => [
-        ...prev.filter((task) => task.id !== id)
-      ])
+    const handleDelete = async (id : number) => {
+      try {
+        const response = await axios.delete(`https://localhost:3000/tasks/${id}`)
+        const result = await response.data
+
+        setData(result)
+      } catch (error) {
+        console.log('Network error')
+      }
     }
 
     if(isError) {
