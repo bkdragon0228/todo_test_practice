@@ -5,8 +5,6 @@ import Todo from './todo';
 import TodoForm from './todoForm';
 import useFetchData from '../../hooks/useFetchData';
 import axios from 'axios';
-import { json } from 'stream/consumers';
-import { r } from 'msw/lib/glossary-de6278a9';
 
 const TodoContainer = () => {
     const [data, setData, isError] = useFetchData<ITask[]>([])
@@ -27,14 +25,14 @@ const TodoContainer = () => {
             'Content-Type': 'application/json'
           },
           body : {
-            task : JSON.stringify(newTask)
+            task : newTask
           }
         })
-
         const result = await response.data
+
         setData(result)
       } catch (error) {
-        console.error(error)
+        console.log('Network Error')
       }
     }
 

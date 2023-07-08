@@ -21,9 +21,9 @@ const getTasks = () => {
 
 const addTask = () => {
     return rest.post('https://localhost:3000/tasks', async (req, res, ctx) => {
-        const { task } = await req.json()
+        const { body } = await req.json()
 
-        return res(ctx.status(200), ctx.json([...tasks, task]))
+        return res(ctx.status(200), ctx.json([...tasks, body.task]))
     })
 }
 
