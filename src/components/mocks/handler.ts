@@ -27,6 +27,14 @@ const addTask = () => {
     })
 }
 
-const tasksHandlers = [getTasks(), addTask()]
+const deleteTask = () => {
+    return rest.delete('https://localhost:3000/tasks/:taskid', async (req, res, ctx) => {
+        const { taskid } = req.params
+
+        return res(ctx.status(200), ctx.json([...tasks.filter((task) => String(task.id) !== taskid )]))
+    })
+}
+
+const tasksHandlers = [getTasks(), addTask(), deleteTask()]
 
 export default tasksHandlers
