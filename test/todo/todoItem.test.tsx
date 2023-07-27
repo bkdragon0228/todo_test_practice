@@ -1,102 +1,79 @@
 import React from 'react';
-import { render , screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import TodoItem from '../../src/components/todo/todoItem'
+import TodoItem from '../../src/components/todo/todoItem';
 
-import userEvent from '@testing-library/user-event'
-import { ITask } from '../../fixtures/tasks';
+import userEvent from '@testing-library/user-event';
+import { initialState } from '../../fixtures/tasks';
+import { TodoProps } from '../../src/store/_reducer/todo';
 
 describe('todoitem', () => {
-    const sampleTitle = 'sample'
-    const sampleId = Math.random()
-    const handleCheckBox = jest.fn()
-    const handleDelete = jest.fn()
+  const handleCheckBox = jest.fn();
+  const handleDelete = jest.fn();
 
-    const renderTodoItem = ({
-        title,
+  const renderTodoItemWithItem = ({ description, done, id }: TodoProps) => {
+    const { container } = render(
+      <TodoItem
+        description={description}
+        id={id}
+        done={done}
+        handleCheckBox={handleCheckBox}
+        handleDelete={handleDelete}
+      />
+    );
+
+    const deleteBtn = screen.getByText('삭제');
+    const checkbox = screen.getByRole('checkbox');
+
+    return { container, deleteBtn, checkbox };
+  };
+  const { description, done, id } = initialState[0];
+
+  context('할 일이 화면에 보일 떄', () => {
+    it('설명, 체크박스, 삭제 버튼이 보여야한다.', () => {
+      const { checkbox, container, deleteBtn } = renderTodoItemWithItem({
+        description,
+        done,
         id,
-        done
-    } : ITask) =>
-        render(
-            <TodoItem
-                title={title}
-                id={id}
-                done={done}
-                handleCheckBox={handleCheckBox}
-                handleDelete={handleDelete}
-            />
-        )
+      });
 
-    it('할 일이 보여야한다.', () => {
-        const { container } = renderTodoItem({
-            done : false,
-            id : Math.random(),
-            title : sampleTitle
-        })
-        expect(container).toHaveTextContent(sampleTitle)
-    })
+      expect(container).toHaveTextContent(initialState[0].description);
+      expect(checkbox).toBeInTheDocument();
+      expect(deleteBtn).toBeInTheDocument();
+    });
+  });
 
-    it('체크 박스가 보여야한다.', () => {
-        renderTodoItem({
-            done : false,
-            id : Math.random(),
-            title : sampleTitle
-        })
-        const checkboxs = screen.getAllByRole('checkbox')
-        expect(checkboxs.length).toBeGreaterThanOrEqual(1)
-    })
+  context('삭제 버튼을 클릭하면', () => {
+    it('handleDelete가 호출된다.', () => {
+      const { deleteBtn } = renderTodoItemWithItem({ description, done, id });
 
-    it('삭제 버튼이 보여야한다.', () => {
-        renderTodoItem({
-            done : false,
-            id : Math.random(),
-            title : sampleTitle
-        })
+      userEvent.click(deleteBtn);
 
-        const deleteButton = screen.getAllByText('삭제')
-        expect(deleteButton.length).toBeGreaterThanOrEqual(1)
-    })
+      expect(handleDelete).toHaveBeenCalledWith(id);
+    });
+  });
 
-    context('체크 박스를 클릭하면', () => {
-        it('handleCheckBox가 호출 되어야 한다..', () => {
-            renderTodoItem({
-                done : false,
-                id : sampleId,
-                title : sampleTitle
-            })
+  context('체크 박스를 누르면', () => {
+    it('handleCheckBox가 호출된다.', () => {
+      const { checkbox } = renderTodoItemWithItem({ description, done, id });
 
-            userEvent.click(screen.getByRole('checkbox'))
+      userEvent.click(checkbox);
 
-            expect(handleCheckBox).toHaveBeenCalledWith(sampleId)
-        })
-    })
+      expect(handleCheckBox).toHaveBeenCalledWith(id);
+    });
+  });
 
-    context('done 값이 true면 ', () =>{
-        it('취소선이 그어져야 한다.', () => {
-            renderTodoItem({
-                done : true,
-                id : Math.random(),
-                title : sampleTitle
-            })
+  context('done 값이 true이면', () => {
+    it('설명에 취소선이 그어진다.', () => {
+      renderTodoItemWithItem({
+        description,
+        done: true,
+        id,
+      });
 
-            expect(screen.getByText(sampleTitle)).toHaveStyle('text-decoration: line-through;')
-        })
-    })
+      const des = screen.getByText(description);
 
-    context('삭제 버튼을 클릭하면', () => {
-        it('handleDelete 함수가 호출 되어야 한다.', () => {
-            renderTodoItem({
-                done : false,
-                id : sampleId,
-                title : sampleTitle
-            })
-
-            const deleteButton = screen.getAllByText('삭제')
-
-            userEvent.click(deleteButton[0])
-
-            expect(handleDelete).toHaveBeenCalled()
-            handleDelete.mockRestore()
-        })
-    })
-})
+      expect(des).toHaveStyle('text-decoration : line-through;');
+    });
+  });
+});
