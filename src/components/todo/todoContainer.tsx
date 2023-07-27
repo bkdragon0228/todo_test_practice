@@ -7,7 +7,7 @@ import TodoForm from './todoForm';
 import useFetchData from '../../hooks/useFetchData';
 import axios from 'axios';
 
-import { addTodo } from '../../store/_reducer/todo';
+import { addTodo, deleteTodo } from '../../store/_reducer/todo';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { TodoProps } from '../../store/_reducer/todo';
 
@@ -35,7 +35,7 @@ const TodoContainer = () => {
 
   const handleCheckBox = (id: string) => {};
 
-  const handleDelete = async (id: string) => {};
+  const handleDelete = async (id: string) => dispatch(deleteTodo(id));
 
   if (isError) {
     return <div data-testid="errorMessage">Network error</div>;
