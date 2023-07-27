@@ -1,40 +1,35 @@
 import React from 'react';
-import { ITask } from '../../../fixtures/tasks';
+import { TodoProps } from '../../store/_reducer/todo';
 
-type TodoItemProps = ITask & {
-    handleCheckBox : (id : number) => void;
-    handleDelete : (id : number) => void;
-}
+type TodoItemProps = TodoProps & {
+  handleCheckBox: (id: string) => void;
+  handleDelete: (id: string) => void;
+};
 
-const TodoItem : React.FC<TodoItemProps> = ({
-    title,
-    id,
-    done,
-    handleCheckBox,
-    handleDelete
+const TodoItem: React.FC<TodoItemProps> = ({
+  description,
+  id,
+  done,
+  handleCheckBox,
+  handleDelete,
 }) => {
-    return (
-        <div style={{
-            display : 'flex'
-        }}>
-            <input
-                type='checkbox'
-                onChange={() => handleCheckBox(id)}
-                />
-            <div
-                style={{
-                    textDecoration : done ? 'line-through' : 'none'
-                }}
-            >
-                {title}
-            </div>
-            <button
-                onClick={() => handleDelete(id)}
-                >
-                    삭제
-            </button>
-        </div>
-    );
+  return (
+    <div
+      style={{
+        display: 'flex',
+      }}
+    >
+      <input type="checkbox" onChange={() => handleCheckBox(id)} />
+      <div
+        style={{
+          textDecoration: done ? 'line-through' : 'none',
+        }}
+      >
+        {description}
+      </div>
+      <button onClick={() => handleDelete(id)}>삭제</button>
+    </div>
+  );
 };
 
 export default TodoItem;
