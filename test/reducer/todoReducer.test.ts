@@ -7,11 +7,9 @@ import TodoReducer, {
 
 import { addTodo, changeDone, deleteTodo } from '../../src/store/_reducer/todo';
 
-describe('todoReducer', () => {
-  const initialState: StateProps = [
-    { description: 'sample', done: false, id: '1' },
-  ];
+import { initialState } from '../../fixtures/tasks';
 
+describe('todoReducer', () => {
   const sampleItem: TodoProps = {
     description: 'samplesample',
     done: false,
