@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface TodoProps {
   id: string;
   description: string;
-  done: false;
+  done: boolean;
 }
 
 export type StateProps = TodoProps[];
@@ -20,9 +20,16 @@ const TodoSlice = createSlice({
       const newState = state.filter((todo) => todo.id !== action.payload);
       return newState;
     },
+    changeDone: (state: StateProps, action: PayloadAction<string>) => {
+      const target = state.find((todo) => todo.id === action.payload);
+
+      if (!target) return;
+
+      target.done = !target.done;
+    },
   },
 });
 
-export const { addTodo, deleteTodo } = TodoSlice.actions;
+export const { addTodo, deleteTodo, changeDone } = TodoSlice.actions;
 
 export default TodoSlice.reducer;

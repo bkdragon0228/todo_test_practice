@@ -7,7 +7,7 @@ import TodoForm from './todoForm';
 import useFetchData from '../../hooks/useFetchData';
 import axios from 'axios';
 
-import { addTodo, deleteTodo } from '../../store/_reducer/todo';
+import { addTodo, deleteTodo, changeDone } from '../../store/_reducer/todo';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { TodoProps } from '../../store/_reducer/todo';
 
@@ -33,7 +33,7 @@ const TodoContainer = () => {
     dispatch(addTodo(newTask));
   };
 
-  const handleCheckBox = (id: string) => {};
+  const handleCheckBox = (id: string) => dispatch(changeDone(id));
 
   const handleDelete = async (id: string) => dispatch(deleteTodo(id));
 
