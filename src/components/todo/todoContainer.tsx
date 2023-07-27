@@ -12,7 +12,6 @@ import { useAppSelector, useAppDispatch } from '../../store';
 import { TodoProps } from '../../store/_reducer/todo';
 
 const TodoContainer = () => {
-  const [data, setData, isError] = useFetchData<ITask[]>([]);
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todo);
 
@@ -36,10 +35,6 @@ const TodoContainer = () => {
   const handleCheckBox = (id: string) => dispatch(changeDone(id));
 
   const handleDelete = async (id: string) => dispatch(deleteTodo(id));
-
-  if (isError) {
-    return <div data-testid="errorMessage">Network error</div>;
-  }
 
   return (
     <div>
