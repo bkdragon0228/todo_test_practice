@@ -1,67 +1,55 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import TodoForm from '../../src/components/todo/todoForm'
+import TodoForm from '../../src/components/todo/todoForm';
 import userEvent from '@testing-library/user-event';
 
-import mockConsole from "jest-mock-console";
+import mockConsole from 'jest-mock-console';
 
 describe('TodoForm', () => {
-    const sampleText = 'sample'
-    const handleSubmit = jest.fn()
-    const showError = jest.fn().mockImplementation(() => console.error(''))
+  const sampleText = 'sample';
+  const handleSubmit = jest.fn();
 
-    const renderTodoForm = () =>
-        render(
-            <TodoForm
-                handleSubmit={handleSubmit}
-                showError={showError}
-            />
-        )
+  const renderTodoForm = () => render(<TodoForm handleSubmit={handleSubmit} />);
 
+  context('todoForm이 화면에 렌더링 되면', () => {
     it('할 일을 입력할 input이 있어야 한다.', () => {
-        renderTodoForm()
+      renderTodoForm();
 
-        screen.getByTestId('todo-input')
-    })
+      screen.getByTestId('todo-input');
+    });
 
     it('할 일 입력 후 누를 button이 있어야 한다,', () => {
-        renderTodoForm()
+      renderTodoForm();
 
-        screen.getByText('등록')
-    })
+      screen.getByText('등록');
+    });
+  });
 
-    context('등록 버튼을 눌렀을 때', () => {
+  context('등록 버튼을 눌렀을 때', () => {
+    context('등록할 값이 없다면', () => {
+      it('등록 버튼이 비활성화 된다.', () => {
+        renderTodoForm();
 
-        context('등록할 값이 없다면', () => {
-            it('에러 메시지가 발생한다', () => {
-                renderTodoForm()
+        expect(screen.getByText('등록')).toBeDisabled();
+      });
+    });
 
-                mockConsole('error')
+    context('등록할 값이 있다면', () => {
+      it('handleSubmit이 호출 된다.', () => {
+        renderTodoForm();
 
-                userEvent.click(screen.getByText('등록'))
+        const input = screen.getByTestId('todo-input');
+        const button = screen.getByText('등록');
 
-                expect(showError).toHaveBeenCalled()
-                expect(console.error).toHaveBeenCalled()
-                showError.mockRestore()
-            })
-        })
+        userEvent.type(input, sampleText);
 
-        context('등록할 값이 있다면', () => {
-            it('handleSubmit이 호출 된다.', () => {
-                renderTodoForm()
+        expect(button).toBeEnabled();
 
-                const input = screen.getByTestId('todo-input')
-                const button = screen.getByText('등록')
+        userEvent.click(button);
 
-                userEvent.type(input, sampleText)
-                userEvent.click(button)
-
-                expect(input).toHaveAttribute('value', sampleText)
-                expect(handleSubmit).toHaveBeenCalledWith(sampleText)
-                handleSubmit.mockRestore()
-            })
-        })
-    })
-
-})
+        expect(handleSubmit).toHaveBeenCalledWith(sampleText);
+      });
+    });
+  });
+});

@@ -15,11 +15,6 @@ const TodoContainer = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todo);
 
-  console.log(todos);
-  const showError = () => {
-    console.error('할 일을 입력해주세요.');
-  };
-
   const handleSubmit = async (value: string) => {
     if (!value) return;
 
@@ -39,7 +34,7 @@ const TodoContainer = () => {
   return (
     <div>
       <h2>할 일</h2>
-      <TodoForm showError={showError} handleSubmit={handleSubmit} />
+      <TodoForm handleSubmit={handleSubmit} />
       <Todo
         todos={todos}
         handleCheckBox={handleCheckBox}
