@@ -1,11 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import { useDispatch, useSelector } from 'react-redux';
 import { persistReducer } from 'redux-persist';
-import type { TypedUseSelectorHook } from 'react-redux';
+import {
+  useDispatch,
+  type TypedUseSelectorHook,
+  useSelector,
+} from 'react-redux';
 
 import todoReducer from './_reducer/todo';
 
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 

@@ -10,7 +10,7 @@ export interface TodoProps {
 export type StateProps = TodoProps[];
 
 const TodoSlice = createSlice({
-  name: 'Survey',
+  name: 'todo',
   initialState: [] as StateProps,
   reducers: {
     addTodo: (state: StateProps, action: PayloadAction<TodoProps>) => {
