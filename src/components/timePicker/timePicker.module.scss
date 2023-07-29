@@ -1,0 +1,20 @@
+@import '../../variable';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: $gap;
+}
+
+.time_picker {
+    background-color: hsla(240,4%,48%,.12);
+    border-radius: 6px;
+    padding: 3px 10px;
+
+    div {
+        border: none;
+        font-size: 20px;
+    }
+}

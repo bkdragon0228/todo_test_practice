@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { Value } from 'react-time-picker/dist/cjs/shared/types';
 
 import { closeModal } from '../../store/_reducer/modal';
 
@@ -6,8 +8,12 @@ import { useAppDispatch, useAppSelector } from '../../store';
 
 import styles from './CompleteModal.module.scss';
 
+import TimePickerContainer from '../timePicker/TimePicker';
+
 const CompleteModal = () => {
   const dispatch = useAppDispatch();
+  const [start, setStart] = useState<Value>('00:00');
+  const [end, setEnd] = useState<Value>('00:00');
   const isOpen = useAppSelector((state) => state.modal.isOpen);
   const todo = useAppSelector((state) => state.modal.todo);
 
@@ -30,14 +36,25 @@ const CompleteModal = () => {
         <table>
           <thead>
             <tr>
-              <th>할 일</th>
+              <th>완료한 일</th>
               <th>시간</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{todo.description}</td>
-              <td>시간 입력하기</td>
+              <td>
+                <TimePickerContainer
+                  label="시작시간"
+                  onChange={setStart}
+                  value={start}
+                />
+                <TimePickerContainer
+                  label="종료시간"
+                  onChange={setEnd}
+                  value={end}
+                />
+              </td>
             </tr>
           </tbody>
         </table>
