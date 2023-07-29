@@ -14,7 +14,7 @@ const AdviceContainer = () => {
 
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -30,6 +30,10 @@ const AdviceContainer = () => {
   const handleChangeAdvice = () => {
     refetchData();
   };
+
+  if (isError) {
+    return <div data-testid="advice_error">서버 에러</div>;
+  }
 
   return (
     <Advice

@@ -1,3 +1,4 @@
+import { act } from '@testing-library/react';
 import { useState, useEffect } from 'react';
 
 export default function useFetchData<T>(
@@ -7,14 +8,16 @@ export default function useFetchData<T>(
   const [data, setData] = useState<T>(ininalState);
   const [isError, setIsError] = useState<boolean>(false);
 
+  const wrappingAct = (callback: () => void) => act(() => callback());
+
   const fetchData = async () => {
     try {
       const result = await fetchFunc();
-      setData(result);
-      setIsError(true);
+      wrappingAct(() => setData(result));
+      wrappingAct(() => setIsError(false));
     } catch (error) {
-      console.log(error);
-      setIsError(true);
+      // console.log(error);
+      wrappingAct(() => setIsError(true));
     }
   };
 
