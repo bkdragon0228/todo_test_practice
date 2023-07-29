@@ -1,0 +1,21 @@
+$gap: 16px;
+
+.todoItem {
+   display: flex;
+   flex-direction: row;
+   column-gap: $gap;
+
+   div {
+    text-align: center;
+    min-width: 200px;
+    white-space: nowrap;
+   }
+
+   button {
+    border: none;
+    &:hover {
+        background-color : dodgerblue;
+        color: white;
+    }
+   }
+}

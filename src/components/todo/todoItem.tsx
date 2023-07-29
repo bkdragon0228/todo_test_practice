@@ -1,6 +1,8 @@
 import React from 'react';
 import { TodoProps } from '../../store/_reducer/todo';
 
+import styles from './todo.module.scss';
+
 type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
   handleDelete: (id: string) => void;
@@ -18,6 +20,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       style={{
         display: 'flex',
       }}
+      className={styles.todoItem}
     >
       <input type="checkbox" onChange={() => handleCheckBox(id)} />
       <div
