@@ -1,7 +1,10 @@
 import React from 'react';
 
 import axios from 'axios';
+
 import useFetchData from '../../hooks/useFetchData';
+
+import Advice from './Advice';
 
 const AdviceContainer = () => {
   const fetchAdvice = async () => {
@@ -26,7 +29,7 @@ const AdviceContainer = () => {
 
   console.log(data);
 
-  return <div>명언</div>;
+  return <Advice id={data?.slip_id} advice={data?.advice} />;
 };
 
 export default AdviceContainer;

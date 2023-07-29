@@ -1,3 +1,4 @@
+import { AdviceProps } from "../src/components/advice/Advice";
 import { StateProps } from "../src/store/_reducer/todo";
 
 export interface ITask {
@@ -15,3 +16,9 @@ export const tasks = [
   export const initialState: StateProps = [
     { description: 'sample', done: false, id: '1' },
   ];
+
+
+export const initalAdvice : AdviceProps = {
+  id : 1,
+  advice : 'Happiness is everywhere and nowhere'
+}
