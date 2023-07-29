@@ -22,7 +22,7 @@ describe('todoitem', () => {
       />
     );
 
-    const deleteBtn = screen.getByText('삭제');
+    const deleteBtn = screen.getByText('완료');
     const checkbox = screen.getByRole('checkbox');
 
     return { container, deleteBtn, checkbox };
@@ -30,7 +30,7 @@ describe('todoitem', () => {
   const { description, done, id } = initialState[0];
 
   context('할 일이 화면에 보일 떄', () => {
-    it('설명, 체크박스, 삭제 버튼이 보여야한다.', () => {
+    it('설명, 체크박스, 완료 버튼이 보여야한다.', () => {
       const { checkbox, container, deleteBtn } = renderTodoItemWithItem({
         description,
         done,
