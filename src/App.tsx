@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+import AdviceContainer from './components/advice/adviceContainer';
 import TodoContainer from './components/todo/todoContainer';
 
 function App() {
@@ -22,7 +24,12 @@ function App() {
     //   </header>
     // </div>
     <div>
-      <TodoContainer />
+      <aside>
+        <AdviceContainer />
+      </aside>
+      <main>
+        <TodoContainer />
+      </main>
     </div>
   );
 }

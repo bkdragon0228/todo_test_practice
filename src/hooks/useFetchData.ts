@@ -1,25 +1,30 @@
-import { useState, useEffect, SetStateAction } from 'react'
+import { useState, useEffect } from 'react';
 
-import axios from 'axios'
+export default function useFetchData<T>(
+  fetchFunc: () => Promise<T>,
+  ininalState: T
+) {
+  const [data, setData] = useState<T>(ininalState);
+  const [isError, setIsError] = useState<boolean>(false);
 
-export default function useFetchData<T>(ininalState : T) : [T, React.Dispatch<SetStateAction<T>>, boolean]  {
-    const [data, setData] = useState<T>(ininalState)
-    const [isError, setIsError] = useState<boolean>(false)
-
-    const fetchdata = async () => {
-        try {
-            const response = await axios.get("https://localhost:3000/tasks")
-            const result = await response.data
-
-            setData(result as T)
-        } catch(error) {
-            setIsError(true)
-        }
+  const fetchData = async () => {
+    try {
+      const result = await fetchFunc();
+      setData(result);
+      setIsError(true);
+    } catch (error) {
+      console.log(error);
+      setIsError(true);
     }
+  };
 
-    useEffect(() => {
-        fetchdata()
-    }, [])
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    return [data, setData, isError]
+  return {
+    data,
+    isError,
+    fetchData,
+  };
 }
