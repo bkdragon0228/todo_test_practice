@@ -1,7 +1,4 @@
 // 통합 헨들러
-import tasksHandlers from "../components/mocks/handler";
+import adviceHandler from '../components/mocks/handler';
 
-export const handlers = [...Object.values(tasksHandlers)]
-
-
-
+export const handlers = [...Object.values(adviceHandler)];

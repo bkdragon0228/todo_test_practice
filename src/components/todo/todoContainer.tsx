@@ -1,11 +1,8 @@
 import React from 'react';
 import uuid from 'react-uuid';
-import { ITask } from '../../../fixtures/tasks';
 
 import Todo from './todo';
 import TodoForm from './todoForm';
-import useFetchData from '../../hooks/useFetchData';
-import axios from 'axios';
 
 import { addTodo, deleteTodo, changeDone } from '../../store/_reducer/todo';
 import { useAppSelector, useAppDispatch } from '../../store';

@@ -18,7 +18,7 @@ export const tasks = [
   ];
 
 
-export const initalAdvice : AdviceProps = {
+export const initalAdvice : Pick<AdviceProps, 'advice' | 'id'> = {
   id : 1,
   advice : 'Happiness is everywhere and nowhere'
 }

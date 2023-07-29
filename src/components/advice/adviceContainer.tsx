@@ -27,9 +27,17 @@ const AdviceContainer = () => {
     advice: string;
   }>(fetchAdvice, { advice: '', slip_id: 0 });
 
-  console.log(data);
+  const handleChangeAdvice = () => {
+    refetchData();
+  };
 
-  return <Advice id={data?.slip_id} advice={data?.advice} />;
+  return (
+    <Advice
+      id={data?.slip_id}
+      advice={data?.advice}
+      handleChangeAdvice={handleChangeAdvice}
+    />
+  );
 };
 
 export default AdviceContainer;

@@ -1,40 +1,30 @@
-import { rest } from 'msw'
+import { rest } from 'msw';
 
-export interface ITask {
-    id : number;
-    title : string;
-    done : boolean;
-}
+const advices = [
+  'Happiness is everywhere and nowhere',
+  'love is gone',
+  'time is money',
+  'love yourself',
+  'be positive',
+  `don't be afraid`,
+  `This too shall pass`,
+  'The die is cast',
+  'Life is unfair, get used to it',
+  'The more ignorant, the more creative.',
+];
 
-export const tasks = [
-    { id: 1, title: '자기', done : false },
-    { id: 2, title: '일어 나기', done : false },
-  ] satisfies ITask[]
+const getAdvice = () => {
+  return rest.get('https://api.adviceslip.com/advice', (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: Math.ceil(Math.random() * 10 - 1),
+        advice: advices[Math.ceil(Math.random() * 10 - 1)],
+      })
+    );
+  });
+};
 
+const adviceHandlers = [getAdvice()];
 
-const getTasks = () => {
-    return rest.get<ITask>('https://localhost:3000/tasks', (_, res, ctx) => {
-
-        return res(ctx.status(200), ctx.json(tasks))
-    })
-}
-
-const addTask = () => {
-    return rest.post('https://localhost:3000/tasks', async (req, res, ctx) => {
-        const { body } = await req.json()
-
-        return res(ctx.status(200), ctx.json([...tasks, body.task]))
-    })
-}
-
-const deleteTask = () => {
-    return rest.delete('https://localhost:3000/tasks/:taskid', async (req, res, ctx) => {
-        const { taskid } = req.params
-
-        return res(ctx.status(200), ctx.json([...tasks.filter((task) => String(task.id) !== taskid )]))
-    })
-}
-
-const tasksHandlers = [getTasks(), addTask(), deleteTask()]
-
-export default tasksHandlers
+export default adviceHandlers;

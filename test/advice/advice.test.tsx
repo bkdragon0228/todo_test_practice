@@ -4,12 +4,19 @@ import Advice, { AdviceProps } from '../../src/components/advice/Advice';
 
 import { render, screen } from '@testing-library/react';
 
+import userEvent from '@testing-library/user-event';
+
 import { initalAdvice } from '../../fixtures/tasks';
 
 describe('Advice', () => {
-  const renderAdvice = (adviceData: AdviceProps) => {
+  const handleChangeAdvice = jest.fn();
+  const renderAdvice = (adviceData: Pick<AdviceProps, 'advice' | 'id'>) => {
     const { container } = render(
-      <Advice advice={adviceData?.advice} id={adviceData?.id} />
+      <Advice
+        advice={adviceData?.advice}
+        id={adviceData?.id}
+        handleChangeAdvice={handleChangeAdvice}
+      />
     );
 
     const advice = screen.getByTestId('advice');
@@ -28,6 +35,16 @@ describe('Advice', () => {
 
       expect(advice).toBeInTheDocument();
       expect(changeBtn).toBeInTheDocument();
+    });
+  });
+
+  context('변경 버튼을 누르면', () => {
+    it('handleChangeAdvice가 호출된다.', () => {
+      const { changeBtn } = renderAdvice(initalAdvice);
+
+      userEvent.click(changeBtn);
+
+      expect(handleChangeAdvice).toHaveBeenCalled();
     });
   });
 });
