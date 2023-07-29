@@ -15,6 +15,14 @@ describe('todoContainer', () => {
   const renderTodoContainer = () => {
     const { Wrapper, store } = mockReduxWrapper({
       todo: initialState,
+      modal: {
+        isOpen: false,
+        todo: {
+          description: '',
+          done: false,
+          id: '1',
+        },
+      },
     });
 
     const { container } = render(
@@ -24,7 +32,7 @@ describe('todoContainer', () => {
     );
 
     const checkBoxs = screen.getAllByRole('checkbox');
-    const deleteBtns = screen.getAllByText('삭제');
+    const deleteBtns = screen.getAllByText('완료');
     const input = screen.getByTestId('todo-input');
     const submitbtn = screen.getByText('등록');
     const description = screen.getByText(initialState[0].description);

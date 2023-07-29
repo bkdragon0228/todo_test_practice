@@ -9,7 +9,7 @@ import logger from 'redux-logger';
 import configureMockStore from 'redux-mock-store';
 
 export default function mockReduxWrapper(
-  initialState?: Pick<RootState, 'todo'>
+  initialState?: Pick<RootState, 'todo' | 'modal'>
 ) {
   const mockStore = configureMockStore([thunk, logger]);
 
