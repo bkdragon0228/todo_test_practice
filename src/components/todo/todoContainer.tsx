@@ -7,6 +7,7 @@ import TodoForm from './todoForm';
 import { addTodo, deleteTodo, changeDone } from '../../store/_reducer/todo';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { TodoProps } from '../../store/_reducer/todo';
+import CompleteModal from '../modal/CompleteModal';
 
 const TodoContainer = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ const TodoContainer = () => {
         handleCheckBox={handleCheckBox}
         handleDelete={handleDelete}
       />
+      <CompleteModal />
     </div>
   );
 };

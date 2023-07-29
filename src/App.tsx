@@ -4,6 +4,7 @@ import './App.css';
 
 import AdviceContainer from './components/advice/adviceContainer';
 import TodoContainer from './components/todo/todoContainer';
+import CompleteModal from './components/modal/CompleteModal';
 
 function App() {
   return (

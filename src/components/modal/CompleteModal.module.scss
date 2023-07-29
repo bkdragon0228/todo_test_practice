@@ -1,0 +1,34 @@
+@import '../../variable';
+
+.container {
+    @include flex-center;
+    position: fixed;
+    top : 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: lighten(black, 30%);
+    opacity: 0.4;
+}
+
+.modal {
+    position: relative;
+    padding : $padding-top $padding-left;
+    width: 500px;
+    height: 300px;
+    border-radius: $radius;
+    background-color: black;
+    color: white;
+}
+
+.delete_btn {
+    position: absolute;
+    top: $padding-top;
+    right: $padding-left;
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
