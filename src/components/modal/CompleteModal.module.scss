@@ -12,6 +12,8 @@
 }
 
 .modal {
+    @include flex-center;
+    flex-direction: column;
     position: relative;
     padding : $padding-top $padding-left;
     width: 500px;
@@ -19,6 +21,15 @@
     border-radius: $radius;
     background-color: black;
     color: white;
+
+    table {
+        width: 100%;
+        border-spacing: $gap;
+
+        td {
+            text-align: center;
+        }
+    }
 }
 
 .delete_btn {
@@ -32,3 +43,8 @@
     cursor: pointer;
 }
 
+.submit_btn {
+    position: absolute;
+    bottom : $padding-top;
+    left : $padding-left;
+}
