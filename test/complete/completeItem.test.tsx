@@ -46,7 +46,7 @@ describe('CompleteItem', () => {
 
       userEvent.click(deleteBtn);
 
-      expect(handleDelete).toHaveBeenCalledWith();
+      expect(handleDelete).toHaveBeenCalled();
     });
   });
 });

@@ -15,6 +15,7 @@ const completeItem: React.FC<CompleteItemProps> = ({
     <div>
       <div>{description}</div>
       <div>{pay}</div>
+      <button onClick={handleDelete}>삭제</button>
     </div>
   );
 };
