@@ -4,6 +4,8 @@ import { Value } from 'react-time-picker/dist/cjs/shared/types';
 
 import { closeModal } from '../../store/_reducer/modal';
 
+import { addComplete } from '../../store/_reducer/complete';
+
 import { useAppDispatch, useAppSelector } from '../../store';
 
 import styles from './CompleteModal.module.scss';
@@ -19,6 +21,11 @@ const CompleteModal = () => {
   const isOpen = useAppSelector((state) => state.modal.isOpen);
   const todo = useAppSelector((state) => state.modal.todo);
 
+  const handleHour = (value: Value) => {
+    setStart(value);
+    setEnd(value);
+  };
+
   const onClickClose = () => {
     if (window.confirm('내용이 저장 안됩니다. 나가시겠습니까?')) {
       dispatch(closeModal());
@@ -30,8 +37,14 @@ const CompleteModal = () => {
       return;
     }
 
-    const money = getMoney(start as string, end as string);
-    console.log(money);
+    const newComplete = {
+      id: todo.id,
+      description: todo.description,
+      pay: getMoney(start as string, end as string),
+    };
+
+    dispatch(addComplete(newComplete));
+    dispatch(closeModal());
   };
 
   if (!isOpen) {
@@ -57,7 +70,7 @@ const CompleteModal = () => {
               <td>
                 <TimePickerContainer
                   label="시작시간"
-                  onChange={setStart}
+                  onChange={handleHour}
                   value={start}
                 />
                 <TimePickerContainer

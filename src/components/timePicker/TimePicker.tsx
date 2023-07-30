@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+
 import { Value } from 'react-time-picker/dist/cjs/shared/types';
 
 import TimePicker from 'react-time-picker';
@@ -12,7 +12,7 @@ import 'react-clock/dist/Clock.css';
 interface Props {
   label: string;
   value: Value;
-  onChange: React.Dispatch<React.SetStateAction<Value>>;
+  onChange: (value: Value) => void;
 }
 
 const TimePickerContainer: React.FC<Props> = ({ label, onChange, value }) => {
