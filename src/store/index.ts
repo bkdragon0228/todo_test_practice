@@ -8,6 +8,7 @@ import {
 
 import todoReducer from './_reducer/todo';
 import modalReducer from './_reducer/modal';
+import completeReducer from './_reducer/complete';
 
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -16,12 +17,13 @@ import logger from 'redux-logger';
 const reducers = combineReducers({
   todo: todoReducer,
   modal: modalReducer,
+  complete: completeReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['todo', 'modal'],
+  whitelist: ['todo', 'modal', 'complete'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
