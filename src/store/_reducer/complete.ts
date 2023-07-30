@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { TodoProps } from './todo';
 
-type CompleteProps = Omit<TodoProps, 'done'> & {
+export type CompleteProps = Omit<TodoProps, 'done'> & {
   pay: number;
 };
 
