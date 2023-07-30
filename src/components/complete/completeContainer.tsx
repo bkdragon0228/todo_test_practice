@@ -13,16 +13,18 @@ const CompleteContainer = () => {
   );
   return (
     <>
+      <h2>완료한 일</h2>
       <div>
         {complete.map((item) => (
           <CompleteItem
             key={item.id}
             description={item.description}
+            handleDelete={() => {}}
             pay={item.pay}
           />
         ))}
       </div>
-      <div>총 : {totalMoney}</div>
+      <div>총 : {totalMoney}원</div>
     </>
   );
 };
