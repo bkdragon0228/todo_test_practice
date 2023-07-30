@@ -4,7 +4,7 @@ import './App.css';
 
 import AdviceContainer from './components/advice/adviceContainer';
 import TodoContainer from './components/todo/todoContainer';
-import CompleteModal from './components/modal/CompleteModal';
+import CompleteContainer from './components/complete/completeContainer';
 
 function App() {
   return (
@@ -31,6 +31,9 @@ function App() {
       <main>
         <TodoContainer />
       </main>
+      <article>
+        <CompleteContainer />
+      </article>
     </div>
   );
 }
