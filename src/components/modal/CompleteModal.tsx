@@ -10,6 +10,8 @@ import styles from './CompleteModal.module.scss';
 
 import TimePickerContainer from '../timePicker/TimePicker';
 
+import getMoney from '../../utils/getMoney';
+
 const CompleteModal = () => {
   const dispatch = useAppDispatch();
   const [start, setStart] = useState<Value>('00:00');
@@ -21,6 +23,15 @@ const CompleteModal = () => {
     if (window.confirm('내용이 저장 안됩니다. 나가시겠습니까?')) {
       dispatch(closeModal());
     }
+  };
+
+  const onSubmit = () => {
+    if (!start || !end) {
+      return;
+    }
+
+    const money = getMoney(start as string, end as string);
+    console.log(money);
   };
 
   if (!isOpen) {
@@ -58,7 +69,9 @@ const CompleteModal = () => {
             </tr>
           </tbody>
         </table>
-        <button className={styles.submit_btn}>확인</button>
+        <button className={styles.submit_btn} onClick={onSubmit}>
+          확인
+        </button>
       </div>
     </div>
   );
