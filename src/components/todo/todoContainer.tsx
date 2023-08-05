@@ -29,8 +29,6 @@ const TodoContainer = () => {
 
   const handleCheckBox = (id: string) => dispatch(changeDone(id));
 
-  const handleDelete = async (id: string) => dispatch(deleteTodo(id));
-
   const handleComplete = (id: string) => {
     if (window.confirm('완료 목록에 등록하시겠습니까?')) {
       const current = todos.find((todo) => todo.id === id);
@@ -50,7 +48,7 @@ const TodoContainer = () => {
       <Todo
         todos={todos}
         handleCheckBox={handleCheckBox}
-        handleDelete={handleComplete}
+        handleComplete={handleComplete}
       />
       <CompleteModal />
     </div>

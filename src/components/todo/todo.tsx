@@ -7,13 +7,13 @@ import { TodoProps } from '../../store/_reducer/todo';
 interface ITodoProps {
   todos: TodoProps[];
   handleCheckBox: (id: string) => void;
-  handleDelete: (id: string) => void;
+  handleComplete: (id: string) => void;
 }
 
 const Todo: React.FC<ITodoProps> = ({
   todos,
   handleCheckBox,
-  handleDelete,
+  handleComplete,
 }) => {
   return (
     <div>
@@ -28,7 +28,7 @@ const Todo: React.FC<ITodoProps> = ({
               done={props.done}
               id={props.id}
               handleCheckBox={handleCheckBox}
-              handleDelete={handleDelete}
+              handleDelete={handleComplete}
             />
           ))}
         </div>
