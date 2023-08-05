@@ -1,35 +1,37 @@
 import React, { useCallback } from 'react';
-import uuid from 'react-uuid';
-
-import Todo from './todo';
-import TodoForm from './todoForm';
 
 import { openModal, setTodo } from '../../store/_reducer/modal';
-
 import { addTodo, deleteTodo, changeDone } from '../../store/_reducer/todo';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { TodoProps } from '../../store/_reducer/todo';
+
+import uuid from 'react-uuid';
+import Todo from './todo';
+import TodoForm from './todoForm';
 import CompleteModal from '../modal/CompleteModal';
 
 const TodoContainer = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todo);
 
-  const handleSubmit = useCallback(async (value: string) => {
-    if (!value) return;
+  const handleSubmit = useCallback(
+    async (value: string) => {
+      if (!value) return;
 
-    const newTask: TodoProps = {
-      id: uuid(),
-      description: value,
-      done: false,
-    };
+      const newTask: TodoProps = {
+        id: uuid(),
+        description: value,
+        done: false,
+      };
 
-    dispatch(addTodo(newTask));
-  }, []);
+      dispatch(addTodo(newTask));
+    },
+    [dispatch]
+  );
 
   const handleCheckBox = useCallback(
     (id: string) => dispatch(changeDone(id)),
-    []
+    [dispatch]
   );
 
   const handleComplete = useCallback(
@@ -41,7 +43,7 @@ const TodoContainer = () => {
 
       dispatch(deleteTodo(id));
     },
-    []
+    [dispatch]
   );
 
   return (

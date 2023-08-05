@@ -16,8 +16,8 @@ const CompleteContainer = () => {
   );
 
   const handleDelete = useCallback(
-    (id: string) => () => dispatch(deleteComplete(id)),
-    []
+    (id: string) => dispatch(deleteComplete(id)),
+    [dispatch]
   );
 
   return (
@@ -28,7 +28,8 @@ const CompleteContainer = () => {
           <CompleteItem
             key={item.id}
             description={item.description}
-            handleDelete={handleDelete(item.id)}
+            handleDelete={handleDelete}
+            id={item.id}
             pay={item.pay}
           />
         ))}
