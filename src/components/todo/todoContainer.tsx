@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import uuid from 'react-uuid';
 
 import Todo from './todo';
@@ -15,7 +15,7 @@ const TodoContainer = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todo);
 
-  const handleSubmit = async (value: string) => {
+  const handleSubmit = useCallback(async (value: string) => {
     if (!value) return;
 
     const newTask: TodoProps = {
@@ -25,21 +25,24 @@ const TodoContainer = () => {
     };
 
     dispatch(addTodo(newTask));
-  };
+  }, []);
 
-  const handleCheckBox = (id: string) => dispatch(changeDone(id));
+  const handleCheckBox = useCallback(
+    (id: string) => dispatch(changeDone(id)),
+    []
+  );
 
-  const handleComplete = (id: string) => {
-    if (window.confirm('완료 목록에 등록하시겠습니까?')) {
-      const current = todos.find((todo) => todo.id === id);
-      if (!current) return;
+  const handleComplete = useCallback(
+    (id: string, description: string, done: boolean) => {
+      if (window.confirm('완료 목록에 등록하시겠습니까?')) {
+        dispatch(setTodo({ description, done, id }));
+        dispatch(openModal());
+      }
 
-      dispatch(setTodo(current));
-      dispatch(openModal());
-    }
-
-    dispatch(deleteTodo(id));
-  };
+      dispatch(deleteTodo(id));
+    },
+    []
+  );
 
   return (
     <div>

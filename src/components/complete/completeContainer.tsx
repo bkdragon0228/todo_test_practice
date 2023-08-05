@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 
@@ -15,7 +15,10 @@ const CompleteContainer = () => {
     [complete]
   );
 
-  const handleDelete = (id: string) => () => dispatch(deleteComplete(id));
+  const handleDelete = useCallback(
+    (id: string) => () => dispatch(deleteComplete(id)),
+    []
+  );
 
   return (
     <>

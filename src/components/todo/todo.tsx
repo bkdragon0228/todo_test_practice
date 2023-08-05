@@ -7,7 +7,7 @@ import { TodoProps } from '../../store/_reducer/todo';
 interface ITodoProps {
   todos: TodoProps[];
   handleCheckBox: (id: string) => void;
-  handleComplete: (id: string) => void;
+  handleComplete: (id: string, description: string, done: boolean) => void;
 }
 
 const Todo: React.FC<ITodoProps> = ({

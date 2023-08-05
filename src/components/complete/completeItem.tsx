@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface CompleteItemProps {
   description: string;
@@ -20,4 +20,4 @@ const completeItem: React.FC<CompleteItemProps> = ({
   );
 };
 
-export default completeItem;
+export default memo(completeItem);

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
+
 import { TodoProps } from '../../store/_reducer/todo';
 
 import styles from './todo.module.scss';
 
 type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
-  handleDelete: (id: string) => void;
+  handleDelete: (id: string, description: string, done: boolean) => void;
 };
 
 const TodoItem: React.FC<TodoItemProps> = ({
@@ -15,6 +16,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleCheckBox,
   handleDelete,
 }) => {
+  console.log(`${description} 리렌더링`);
+
   return (
     <div
       style={{
@@ -30,9 +33,9 @@ const TodoItem: React.FC<TodoItemProps> = ({
       >
         {description}
       </div>
-      <button onClick={() => handleDelete(id)}>완료</button>
+      <button onClick={() => handleDelete(id, description, done)}>완료</button>
     </div>
   );
 };
 
-export default TodoItem;
+export default memo(TodoItem);
