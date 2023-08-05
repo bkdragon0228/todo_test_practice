@@ -25,6 +25,7 @@ const TimePickerContainer: React.FC<Props> = ({ label, onChange, value }) => {
         value={value}
         format="HH:mm"
         clearIcon={null}
+        data-testid="timePicker"
         disableClock
         required
       />

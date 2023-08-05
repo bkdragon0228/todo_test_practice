@@ -22,7 +22,6 @@ const CompleteModal = () => {
     handleEndHour,
     handleErrorMsg,
     handleStartHour,
-    validateTime,
   } = useTimes({ start: '00:00', end: '00:00' });
   const isOpen = useAppSelector((state) => state.modal.isOpen);
   const todo = useAppSelector((state) => state.modal.todo);
