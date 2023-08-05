@@ -52,7 +52,7 @@ describe('useTimes', () => {
     });
 
     context('시간을 잘못 입력하면', () => {
-      it('null을 반환 한다.', () => {
+      it('undefined을 반환 한다.', () => {
         const { result } = setUpCustomHook();
 
         act(() => {
@@ -65,7 +65,7 @@ describe('useTimes', () => {
           result.current.end
         );
 
-        expect(money).toBeNull();
+        expect(money).toBeUndefined();
       });
     });
   });

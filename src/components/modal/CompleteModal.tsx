@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Value } from 'react-time-picker/dist/cjs/shared/types';
-
 import { closeModal } from '../../store/_reducer/modal';
 
 import { addComplete } from '../../store/_reducer/complete';
