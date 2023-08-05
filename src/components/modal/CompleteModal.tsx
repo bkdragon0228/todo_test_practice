@@ -34,7 +34,7 @@ const CompleteModal = () => {
       return;
     }
 
-    if (validateTime(start, end) === false) {
+    if (!getMoney(start, end)) {
       handleErrorMsg('시간을 다시 입력해주세요.');
       return;
     }
@@ -44,7 +44,7 @@ const CompleteModal = () => {
     const newComplete = {
       id: todo.id,
       description: todo.description,
-      pay: getMoney(start, end),
+      pay: getMoney(start, end) as number,
     };
 
     dispatch(addComplete(newComplete));
