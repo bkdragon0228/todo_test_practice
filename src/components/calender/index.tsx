@@ -6,6 +6,7 @@ import {
   endOfMonth,
   addDays,
   startOfWeek,
+  endOfWeek,
 } from 'date-fns';
 
 import styles from './calender.module.scss';
@@ -29,20 +30,23 @@ const Calender = () => {
     const startOfmonth = startOfMonth(new Date(year, month));
     const endOfmonth = endOfMonth(startOfmonth);
 
+    const startOfweek = startOfWeek(startOfmonth);
+    const endOfweek = endOfWeek(endOfmonth);
+
+    console.log(endOfweek);
+
     const result: CalenderMap = [];
     let week: Cell[] = [];
 
     let start = 0;
-    const end = formatChange(endOfmonth).split('/').map(Number)[1];
-    while (start < end) {
+    const monthEnd = formatChange(endOfmonth).split('/').map(Number)[1];
+    const weekEnd = formatChange(endOfweek).split('/').map(Number)[1];
+    while (start <= weekEnd + monthEnd) {
       week = [];
-
       for (let i = 0; i <= 6; i += 1) {
         let [month, day, year, name] = formatChange(
-          addDays(startOfWeek(startOfmonth), start)
+          addDays(startOfweek, start)
         ).split('/');
-
-        if (i !== 0 && name === 'Sun') break;
 
         const cell: Cell = {
           day,
@@ -57,7 +61,7 @@ const Calender = () => {
 
       result.push(week);
     }
-
+    console.log(result);
     return result;
   }, []);
 
@@ -68,7 +72,7 @@ const Calender = () => {
           <div key={day}>{day}</div>
         ))}
       </nav>
-      {set(2023, 8 - 1).map((weeks, index) => (
+      {set(2023, 6 - 1).map((weeks, index) => (
         <div key={index} className={styles.row}>
           {weeks.map((day) => (
             <div key={`${day.day}${day.name}`} className={styles.item}>
