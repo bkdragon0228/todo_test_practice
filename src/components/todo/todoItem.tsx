@@ -25,7 +25,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
       }}
       className={styles.todoItem}
     >
-      <input type="checkbox" onChange={() => handleCheckBox(id)} />
+      <input
+        type="checkbox"
+        checked={done}
+        onChange={() => handleCheckBox(id)}
+      />
       <div
         style={{
           textDecoration: done ? 'line-through' : 'none',

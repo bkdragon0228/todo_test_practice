@@ -5,6 +5,7 @@ import './App.css';
 import AdviceContainer from './components/advice/adviceContainer';
 import TodoContainer from './components/todo/todoContainer';
 import CompleteContainer from './components/complete/completeContainer';
+import Calender from './components/calender';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
     //   </header>
     // </div>
     <div>
+      <Calender />
       <aside>
         <AdviceContainer />
       </aside>
