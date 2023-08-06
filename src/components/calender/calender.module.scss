@@ -1,0 +1,12 @@
+@import '../../variable';
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(7, $calender-width);
+}
+
+.item {
+    width: 100%;
+    height: $calender-height;
+    border: 1px solid lightgray;
+}

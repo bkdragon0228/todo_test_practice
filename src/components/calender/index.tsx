@@ -5,9 +5,10 @@ import {
   startOfMonth,
   endOfMonth,
   addDays,
-  subDays,
   startOfWeek,
 } from 'date-fns';
+
+import styles from './calender.module.scss';
 
 type DayOfWeek = 'Sun' | 'Mon' | 'Tue ' | 'Wed' | 'Thu' | 'Fri' | 'Sat';
 
@@ -21,6 +22,7 @@ interface Cell {
 type CalenderMap = Cell[][];
 
 const Calender = () => {
+  const dayOfWeek = ['Sun', 'Mon', 'Tue ', 'Wed', 'Thu', 'Fri', 'Sat'];
   const formatChange = (date: Date) => format(date, 'MM/dd/yyyy/EEE');
 
   const set = useCallback((year: number, month: number) => {
@@ -59,13 +61,19 @@ const Calender = () => {
     return result;
   }, []);
 
-  console.log(subDays(new Date(2023, 8, 1), 1));
   return (
     <div>
+      <nav className={styles.row}>
+        {dayOfWeek.map((day) => (
+          <div key={day}>{day}</div>
+        ))}
+      </nav>
       {set(2023, 8 - 1).map((weeks, index) => (
-        <div key={index}>
+        <div key={index} className={styles.row}>
           {weeks.map((day) => (
-            <div key={`${day.day}${day.name}`}>{day.day}</div>
+            <div key={`${day.day}${day.name}`} className={styles.item}>
+              <span>{day.day}</span>
+            </div>
           ))}
         </div>
       ))}
