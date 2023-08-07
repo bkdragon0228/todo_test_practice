@@ -11,6 +11,10 @@ import {
 
 import styles from './calender.module.scss';
 
+import cn from 'classnames';
+
+import useMonth from '../../hooks/useMonth';
+
 type DayOfWeek = 'Sun' | 'Mon' | 'Tue ' | 'Wed' | 'Thu' | 'Fri' | 'Sat';
 
 interface Cell {
@@ -23,6 +27,10 @@ interface Cell {
 type CalenderMap = Cell[][];
 
 const Calender = () => {
+  const { currnetMonth, currentYear, nextMonth, prevMonth } = useMonth();
+
+  const today = format(new Date(), 'MM/dd/yyyy').split('/');
+
   const dayOfWeek = ['Sun', 'Mon', 'Tue ', 'Wed', 'Thu', 'Fri', 'Sat'];
   const formatChange = (date: Date) => format(date, 'MM/dd/yyyy/EEE');
 
@@ -33,15 +41,15 @@ const Calender = () => {
     const startOfweek = startOfWeek(startOfmonth);
     const endOfweek = endOfWeek(endOfmonth);
 
-    console.log(endOfweek);
-
     const result: CalenderMap = [];
     let week: Cell[] = [];
 
     let start = 0;
     const monthEnd = formatChange(endOfmonth).split('/').map(Number)[1];
     const weekEnd = formatChange(endOfweek).split('/').map(Number)[1];
-    while (start <= weekEnd + monthEnd) {
+    const extra = weekEnd === monthEnd ? 0 : weekEnd;
+
+    while (start <= monthEnd + extra) {
       week = [];
       for (let i = 0; i <= 6; i += 1) {
         let [month, day, year, name] = formatChange(
@@ -67,15 +75,30 @@ const Calender = () => {
 
   return (
     <div>
+      <header>
+        {currentYear}년 {currnetMonth}월
+      </header>
+      <div>
+        <button onClick={prevMonth}>이전</button>
+        <button onClick={nextMonth}>다음</button>
+      </div>
       <nav className={styles.row}>
         {dayOfWeek.map((day) => (
           <div key={day}>{day}</div>
         ))}
       </nav>
-      {set(2023, 6 - 1).map((weeks, index) => (
+      {set(+currentYear, Number(currnetMonth) - 1).map((weeks, index) => (
         <div key={index} className={styles.row}>
           {weeks.map((day) => (
-            <div key={`${day.day}${day.name}`} className={styles.item}>
+            <div
+              key={`${day.day}${day.name}`}
+              className={cn(styles.item, {
+                [styles.item_current]:
+                  today[0] === day.month &&
+                  today[1] === day.day &&
+                  today[2] === day.year,
+              })}
+            >
               <span>{day.day}</span>
             </div>
           ))}

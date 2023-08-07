@@ -9,4 +9,11 @@
     width: 100%;
     height: $calender-height;
     border: 1px solid lightgray;
+
+
+}
+
+.item_current {
+    @extend .item;
+    background-color: lightgrey;
 }
