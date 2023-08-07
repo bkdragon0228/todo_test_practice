@@ -9,9 +9,9 @@ import {
   endOfWeek,
 } from 'date-fns';
 
-import styles from './calender.module.scss';
+import classnames from 'classnames/bind';
 
-import cn from 'classnames';
+import styles from './calender.module.scss';
 
 import useMonth from '../../hooks/useMonth';
 
@@ -25,6 +25,8 @@ interface Cell {
 }
 
 type CalenderMap = Cell[][];
+
+const cn = classnames.bind(styles);
 
 const Calender = () => {
   const { currnetMonth, currentYear, nextMonth, prevMonth } = useMonth();
@@ -92,8 +94,9 @@ const Calender = () => {
           {weeks.map((day) => (
             <div
               key={`${day.day}${day.name}`}
-              className={cn(styles.item, {
-                [styles.item_current]:
+              className={cn({
+                item: true,
+                item_current:
                   today[0] === day.month &&
                   today[1] === day.day &&
                   today[2] === day.year,
