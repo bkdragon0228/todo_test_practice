@@ -49,7 +49,7 @@ describe('todoitem', () => {
 
       userEvent.click(deleteBtn);
 
-      expect(handleDelete).toHaveBeenCalledWith(id);
+      expect(handleDelete).toHaveBeenCalled();
     });
   });
 

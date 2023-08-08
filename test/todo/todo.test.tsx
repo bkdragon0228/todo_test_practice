@@ -1,9 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Todo from '../../src/components/todo/todo';
 import { StateProps } from '../../src/store/_reducer/todo';
-import { initialState } from '../../fixtures/tasks';
 
 describe('todo', () => {
   const handleCheckbox = jest.fn();
@@ -14,7 +13,7 @@ describe('todo', () => {
       <Todo
         todos={todos}
         handleCheckBox={handleCheckbox}
-        handleDelete={handleDelete}
+        handleComplete={handleDelete}
       />
     );
 

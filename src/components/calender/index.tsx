@@ -71,7 +71,6 @@ const Calender = () => {
 
       result.push(week);
     }
-    console.log(result);
     return result;
   }, []);
 

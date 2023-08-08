@@ -12,6 +12,7 @@ describe('CompleteItem', () => {
   const renderCompleteItem = () => {
     const { container } = render(
       <CompleteItem
+        id="1"
         description="sample"
         pay={1000}
         handleDelete={handleDelete}
