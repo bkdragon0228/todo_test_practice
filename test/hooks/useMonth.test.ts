@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { renderHook } from '@testing-library/react';
 
 import useMonth from '../../src/hooks/useMonth';
+import { act } from 'react-dom/test-utils';
 
 describe('useMonth', () => {
   const current = format(new Date(), 'MM/dd/yyyy').split('/');
@@ -16,6 +17,26 @@ describe('useMonth', () => {
 
       expect(result.current.currentYear).toBe(current[2]);
       expect(result.current.currnetMonth).toBe(current[0]);
+    });
+  });
+
+  context('nextMonth를 사용하면', () => {
+    it('월이 1 증가한다.', () => {
+      const { result } = setCustomHook();
+
+      act(() => {
+        result.current.nextMonth();
+      });
+
+      let compare = Number(current[0]) + 1;
+      let compareStr: string;
+      if (compare < 10) {
+        compareStr = `0${compare}`;
+      } else {
+        compareStr = `${compare}`;
+      }
+
+      expect(result.current.currnetMonth).toBe(compareStr);
     });
   });
 });
