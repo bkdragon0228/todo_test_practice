@@ -17,6 +17,8 @@ describe('calender', () => {
         currnetMonth: '09',
         nextMonth: jest.fn(),
         prevMonth: jest.fn(),
+        getCalender: jest.fn(),
+        dayOfWeek: ['Sun', 'Mon', 'Tue ', 'Wed', 'Thu', 'Fri', 'Sat'],
       }));
 
     const { container } = render(<Calender />);

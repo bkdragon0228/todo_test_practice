@@ -4,8 +4,9 @@ import { format } from 'date-fns';
 
 import { renderHook } from '@testing-library/react';
 
-import useMonth from '../../src/hooks/useMonth';
 import { act } from 'react-dom/test-utils';
+
+import useMonth from '../../src/hooks/useMonth';
 
 describe('useMonth', () => {
   const current = format(new Date(), 'MM/dd/yyyy').split('/');
