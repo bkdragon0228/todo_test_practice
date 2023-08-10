@@ -2,6 +2,8 @@ import React from 'react';
 
 import { screen, render } from '@testing-library/react';
 
+import { dummyCalender } from '../../fixtures/tasks';
+
 import userEvent from '@testing-library/user-event';
 
 import Calender from '../../src/components/calender';
@@ -17,7 +19,9 @@ describe('calender', () => {
         currnetMonth: '09',
         nextMonth: jest.fn(),
         prevMonth: jest.fn(),
-        getCalender: jest.fn(),
+        getCalender: jest
+          .fn()
+          .mockImplementation(() => JSON.parse(dummyCalender)),
         dayOfWeek: ['Sun', 'Mon', 'Tue ', 'Wed', 'Thu', 'Fri', 'Sat'],
       }));
 
@@ -28,7 +32,7 @@ describe('calender', () => {
     };
   };
   context('컴포넌트가 렌더링 되면', () => {
-    it('현재 날짜가 보인다.', () => {
+    it('현재 연도와 월 요일이 보인다.', () => {
       const { container, useMonthMock } = renderCalender();
 
       expect(container).toHaveTextContent('Sun');
@@ -39,7 +43,17 @@ describe('calender', () => {
       expect(container).toHaveTextContent('Fri');
       expect(container).toHaveTextContent('Sat');
       expect(container).toHaveTextContent('09월');
+      expect(container).toHaveTextContent('2023년');
 
+      useMonthMock.mockRestore();
+    });
+
+    it('달력을 생성하는 함수가 호출된다.', () => {
+      const { useMonthMock } = renderCalender();
+
+      expect(
+        useMonthMock.mock.results[0].value.getCalender
+      ).toHaveBeenCalledWith(2023, 9 - 1);
       useMonthMock.mockRestore();
     });
 
@@ -67,6 +81,7 @@ describe('calender', () => {
       expect(
         useMonthMock.mock.results[0].value.prevMonth
       ).not.toHaveBeenCalled();
+      useMonthMock.mockRestore();
     });
   });
 });

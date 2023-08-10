@@ -4,6 +4,8 @@ import { format } from 'date-fns';
 
 import { renderHook } from '@testing-library/react';
 
+import { dummyCalender } from '../../fixtures/tasks';
+
 import { act } from 'react-dom/test-utils';
 
 import useMonth from '../../src/hooks/useMonth';
@@ -38,6 +40,16 @@ describe('useMonth', () => {
       }
 
       expect(result.current.currnetMonth).toBe(compareStr);
+    });
+  });
+
+  context('getCalender', () => {
+    it('달력이 생성된다.', () => {
+      const { result } = setCustomHook();
+
+      const results = result.current.getCalender(2023, 9);
+
+      expect(JSON.stringify(results)).toBe(dummyCalender);
     });
   });
 });
