@@ -2,7 +2,11 @@ import React, { memo } from 'react';
 
 import { TodoProps } from '../../store/_reducer/todo';
 
+import { Box, useStyleConfig } from '@chakra-ui/react';
+
 import styles from './todo.module.scss';
+
+import CustomButton from '../atoms/Button';
 
 type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
@@ -16,14 +20,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleCheckBox,
   handleDelete,
 }) => {
-  console.log(`${description} 리렌더링`);
+  // console.log(`${description} 리렌더링`);
+
+  const themes = useStyleConfig('Card');
 
   return (
-    <div
-      style={{
-        display: 'flex',
-      }}
-      className={styles.todoItem}
+    <Box
+      // style={{
+      //   display: 'flex',
+      // }}
+      // className={styles.todoItem}
+      __css={themes}
     >
       <input
         type="checkbox"
@@ -37,8 +44,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
       >
         {description}
       </div>
-      <button onClick={() => handleDelete(id, description, done)}>완료</button>
-    </div>
+      <CustomButton
+        onClick={() => handleDelete(id, description, done)}
+        size="sm"
+      >
+        완료
+      </CustomButton>
+    </Box>
   );
 };
 

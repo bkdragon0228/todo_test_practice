@@ -8,6 +8,8 @@ import styles from './calender.module.scss';
 
 import useMonth from '../../hooks/useMonth';
 
+import CustomButton from '../atoms/Button';
+
 const cn = classnames.bind(styles);
 
 const Calender = () => {
@@ -28,8 +30,8 @@ const Calender = () => {
         {currentYear}년 {currnetMonth}월
       </header>
       <div>
-        <button onClick={prevMonth}>이전</button>
-        <button onClick={nextMonth}>다음</button>
+        <CustomButton onClick={prevMonth}>이전</CustomButton>
+        <CustomButton onClick={nextMonth}>다음</CustomButton>
       </div>
       <nav className={styles.row}>
         {dayOfWeek.map((day) => (
