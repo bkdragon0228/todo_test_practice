@@ -27,13 +27,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={Persistor}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={Persistor}>
+        <ChakraProvider theme={theme}>
           <App />
-        </PersistGate>
-      </Provider>
-    </ChakraProvider>
+        </ChakraProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 

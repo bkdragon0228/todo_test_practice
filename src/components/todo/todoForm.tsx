@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { Button } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import CustomButton from '../atoms/Button';
+
+import CustonInput from '../atoms/Input';
 
 interface ITodoForm {
   handleSubmit: (value: string) => void;
@@ -17,18 +19,19 @@ const TodoForm: React.FC<ITodoForm> = ({ handleSubmit }) => {
   };
 
   return (
-    <div>
-      <input
+    <Flex gap={0}>
+      <CustonInput
         type="text"
         placeholder="할 일"
         data-testid="todo-input"
+        width={300}
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <CustomButton onClick={onClick} disabled={!content} size="sm">
+      <CustomButton onClick={onClick} isDisabled={!content}>
         등록
       </CustomButton>
-    </div>
+    </Flex>
   );
 };
 

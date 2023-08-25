@@ -55,15 +55,61 @@ const Card = defineStyleConfig({
       boxShadow: 'md',
     },
   },
-
   defaultProps: {
     variant: 'smooth',
   },
 });
 
+const Input = defineStyleConfig({
+  baseStyle: {
+    field: {
+      borderRadius: 'base',
+      _focus: {
+        border: 'none',
+      },
+    },
+  },
+  sizes: {
+    sm: {
+      field: {
+        fontSize: 'sm',
+        px: 4,
+        py: 3,
+      },
+    },
+    md: {
+      filed: {
+        fontSize: 'md',
+        px: 6,
+        py: 4,
+      },
+    },
+    lg: {
+      field: {
+        fontSize: 'lg',
+        px: 8,
+        py: 6,
+      },
+    },
+  },
+  variants: {
+    outline: {
+      field: {
+        border: '2px solid',
+        borderColor: 'purple.500',
+      },
+    },
+  },
+  defaultProps: {
+    size: 'md',
+    variant: 'outline',
+  },
+});
+
 export const theme = extendTheme({
   components: {
-    Button,
-    Card,
+    Button: Button,
+    Input: Input,
+    Card: Card,
   },
 });
