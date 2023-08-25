@@ -6,7 +6,7 @@ import AdviceContainer from './components/advice/adviceContainer';
 import TodoContainer from './components/todo/todoContainer';
 import CompleteContainer from './components/complete/completeContainer';
 import Calender from './components/calender';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 function App() {
   return (
@@ -16,11 +16,19 @@ function App() {
       gap={6}
       margin={'0 auto'}
       width={['100%', '100%', '100%', 1200]}
+      position={'relative'}
     >
-      <Calender />
-      <aside>
+      <Box
+        as="aside"
+        position={{ lg: 'absolute', md: 'relative' }}
+        top={0}
+        left={0}
+      >
+        <Calender />
+      </Box>
+      <nav>
         <AdviceContainer />
-      </aside>
+      </nav>
       <main>
         <TodoContainer />
       </main>

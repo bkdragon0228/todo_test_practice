@@ -9,6 +9,7 @@ import styles from './calender.module.scss';
 import useMonth from '../../hooks/useMonth';
 
 import CustomButton from '../atoms/Button';
+import { Flex } from '@chakra-ui/react';
 
 const cn = classnames.bind(styles);
 
@@ -26,13 +27,16 @@ const Calender = () => {
 
   return (
     <div>
-      <header>
+      <Flex justifyContent={'space-between'}>
+        <CustomButton onClick={prevMonth} size={'xs'}>
+          {'<'}
+        </CustomButton>
         {currentYear}년 {currnetMonth}월
-      </header>
-      <div>
-        <CustomButton onClick={prevMonth}>이전</CustomButton>
-        <CustomButton onClick={nextMonth}>다음</CustomButton>
-      </div>
+        <CustomButton onClick={nextMonth} size={'xs'}>
+          {'>'}
+        </CustomButton>
+      </Flex>
+
       <nav className={styles.row}>
         {dayOfWeek.map((day) => (
           <div key={day}>{day}</div>

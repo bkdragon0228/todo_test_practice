@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomButton from '../atoms/Button';
 
 export interface AdviceProps {
   id: number;
@@ -10,9 +11,12 @@ const Advice: React.FC<AdviceProps> = ({ advice, id, handleChangeAdvice }) => {
   return (
     <div key={id}>
       <div data-testid="advice">{advice}</div>
-      <button data-testid="advice_change_btn" onClick={handleChangeAdvice}>
+      <CustomButton
+        data-testid="advice_change_btn"
+        onClick={handleChangeAdvice}
+      >
         변경
-      </button>
+      </CustomButton>
     </div>
   );
 };
