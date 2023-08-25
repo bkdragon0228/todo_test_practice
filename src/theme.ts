@@ -1,4 +1,4 @@
-import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
+import { extendTheme, defineStyleConfig, defineStyle } from '@chakra-ui/react';
 
 const Button = defineStyleConfig({
   baseStyle: {
@@ -105,8 +105,8 @@ const Input = defineStyleConfig({
 
 export const theme = extendTheme({
   components: {
-    Button: Button,
-    Input: Input,
-    Card: Card,
+    Button,
+    Input,
+    Card,
   },
 });

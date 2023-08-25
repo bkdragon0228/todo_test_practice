@@ -8,6 +8,8 @@ import styles from './todo.module.scss';
 
 import CustomButton from '../atoms/Button';
 
+import CheckBox from '../atoms/CheckBox';
+
 type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
   handleDelete: (id: string, description: string, done: boolean) => void;
@@ -32,8 +34,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       // className={styles.todoItem}
       __css={themes}
     >
-      <input
-        type="checkbox"
+      <CheckBox
         checked={done}
         onChange={() => handleCheckBox(id)}
         style={{ width: '20px' }}
