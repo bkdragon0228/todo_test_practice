@@ -38,19 +38,16 @@ const Button = defineStyleConfig({
 const Card = defineStyleConfig({
   baseStyle: {
     display: 'flex',
-    flexDirection: 'row',
-    background: 'white',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 6,
+    background: 'white',
   },
   variants: {
     rounded: {
-      padding: 8,
       borderRadius: 'xl',
       boxShadow: 'xl',
     },
     smooth: {
-      padding: 6,
       borderRadius: 'base',
       boxShadow: 'md',
     },

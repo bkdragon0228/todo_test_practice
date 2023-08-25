@@ -36,10 +36,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
         type="checkbox"
         checked={done}
         onChange={() => handleCheckBox(id)}
+        style={{ width: '20px' }}
       />
       <div
         style={{
           textDecoration: done ? 'line-through' : 'none',
+          width: '280px',
+          padding: '8px',
+          whiteSpace: 'normal',
         }}
       >
         {description}
@@ -47,6 +51,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       <CustomButton
         onClick={() => handleDelete(id, description, done)}
         size="sm"
+        width={20}
       >
         완료
       </CustomButton>

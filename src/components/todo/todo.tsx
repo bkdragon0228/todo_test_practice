@@ -3,6 +3,7 @@ import React from 'react';
 import TodoItem from './todoItem';
 
 import { TodoProps } from '../../store/_reducer/todo';
+import { Flex } from '@chakra-ui/react';
 
 interface ITodoProps {
   todos: TodoProps[];
@@ -20,7 +21,7 @@ const Todo: React.FC<ITodoProps> = ({
       {!todos?.length ? (
         <div>할 일 없음</div>
       ) : (
-        <div>
+        <Flex flexDirection="column" gap="1rem">
           {todos.map((props) => (
             <TodoItem
               key={props.id}
@@ -31,7 +32,7 @@ const Todo: React.FC<ITodoProps> = ({
               handleDelete={handleComplete}
             />
           ))}
-        </div>
+        </Flex>
       )}
     </div>
   );
