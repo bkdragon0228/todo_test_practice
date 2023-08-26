@@ -5,7 +5,7 @@ import { FormControl, FormControlProps, InputProps } from '@chakra-ui/react';
 import CustonInput from '../atoms/Input';
 import CustomButton, { Props } from '../atoms/Button';
 
-interface FormProps {
+export interface FormProps {
   form: FormControlProps;
   input: InputProps;
   button: Props;

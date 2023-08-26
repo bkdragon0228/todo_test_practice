@@ -2,7 +2,7 @@ import React from 'react';
 import CustomButton from '../atoms/Button';
 import { Box, BoxProps } from '@chakra-ui/react';
 
-interface AdviceProps {
+export interface AdviceProps {
   id: number;
   advice: string;
   handleChangeAdvice: () => void;

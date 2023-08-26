@@ -8,7 +8,7 @@ import CustomButton from '../atoms/Button';
 
 import CheckBox from '../atoms/CheckBox';
 
-type TodoItemProps = TodoProps & {
+export type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
   handleDelete: (id: string, description: string, done: boolean) => void;
 };
