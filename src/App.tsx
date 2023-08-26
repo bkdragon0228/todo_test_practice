@@ -7,6 +7,7 @@ import TodoContainer from './components/todo/todoContainer';
 import CompleteContainer from './components/complete/completeContainer';
 import Calender from './components/calender';
 import { Box, Flex } from '@chakra-ui/react';
+import Index from './components/unit/pages';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       width={['100%', '100%', '100%', 1200]}
       position={'relative'}
     >
-      <Box
+      {/* <Box
         as="aside"
         position={{ lg: 'absolute', md: 'relative' }}
         top={0}
@@ -34,7 +35,8 @@ function App() {
       </main>
       <article>
         <CompleteContainer />
-      </article>
+      </article> */}
+      <Index />
     </Flex>
   );
 }
