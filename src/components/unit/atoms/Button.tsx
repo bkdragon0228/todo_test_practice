@@ -2,9 +2,9 @@ import React, { PropsWithChildren } from 'react';
 
 import { Button, ButtonProps } from '@chakra-ui/react';
 
-type Props = ButtonProps;
+export type Props = PropsWithChildren<ButtonProps>;
 
-const CustomButton = (props: PropsWithChildren<Props>) => {
+const CustomButton = (props: Props) => {
   const { children, ...rest } = props;
   return <Button {...rest}>{children}</Button>;
 };
