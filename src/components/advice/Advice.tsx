@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomButton from '../atoms/Button';
+import CustomButton from '../unit/atoms/Button';
 
 export interface AdviceProps {
   id: number;

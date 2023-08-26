@@ -8,7 +8,7 @@ import styles from './calender.module.scss';
 
 import useMonth from '../../hooks/useMonth';
 
-import CustomButton from '../atoms/Button';
+import CustomButton from '../unit/atoms/Button';
 import { Flex } from '@chakra-ui/react';
 
 const cn = classnames.bind(styles);

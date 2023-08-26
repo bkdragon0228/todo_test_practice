@@ -6,9 +6,9 @@ import { Box, useStyleConfig } from '@chakra-ui/react';
 
 import styles from './todo.module.scss';
 
-import CustomButton from '../atoms/Button';
+import CustomButton from '../unit/atoms/Button';
 
-import CheckBox from '../atoms/CheckBox';
+import CheckBox from '../unit/atoms/CheckBox';
 
 type TodoItemProps = TodoProps & {
   handleCheckBox: (id: string) => void;
@@ -22,7 +22,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleCheckBox,
   handleDelete,
 }) => {
-  // console.log(`${description} 리렌더링`);
+  console.log(`${description} 리렌더링`);
 
   const themes = useStyleConfig('Card');
 
@@ -35,7 +35,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       __css={themes}
     >
       <CheckBox
-        checked={done}
+        isChecked={done}
         onChange={() => handleCheckBox(id)}
         style={{ width: '20px' }}
       />
