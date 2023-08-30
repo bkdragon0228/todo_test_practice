@@ -18,8 +18,9 @@ function App() {
       margin={'0 auto'}
       width={['100%', '100%', '100%', 1200]}
       position={'relative'}
+      boxSizing="border-box"
     >
-      {/* <Box
+      <Box
         as="aside"
         position={{ lg: 'absolute', md: 'relative' }}
         top={0}
@@ -27,7 +28,7 @@ function App() {
       >
         <Calender />
       </Box>
-      <nav>
+      {/* <nav>
         <AdviceContainer />
       </nav>
       <main>

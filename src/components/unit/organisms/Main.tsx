@@ -15,6 +15,7 @@ import { CompleteProps } from '../../../store/_reducer/complete';
 import Advice from '../molecules/Advice';
 
 import Form from '../molecules/Form';
+import CompleteModal from '../molecules/CompleteModal';
 
 export interface MainProps {
   advice: AdviceProps;
@@ -46,7 +47,7 @@ const Main: React.FC<MainProps> = ({ advice, form, completes, todos }) => {
           />
         ))}
       </Box>
-      <Box></Box>
+      <CompleteModal />
     </Box>
   );
 };

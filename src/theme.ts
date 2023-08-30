@@ -1,4 +1,4 @@
-import { extendTheme, defineStyleConfig, defineStyle } from '@chakra-ui/react';
+import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
 
 const Button = defineStyleConfig({
   baseStyle: {

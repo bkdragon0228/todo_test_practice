@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TodoProps } from '../../../store/_reducer/todo';
 
-import { Box, useStyleConfig } from '@chakra-ui/react';
+import { Box, calc, useStyleConfig } from '@chakra-ui/react';
 
 import CustomButton from '../atoms/Button';
 
@@ -23,17 +23,22 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const themes = useStyleConfig('Card');
 
   return (
-    <Box __css={themes}>
-      <CheckBox
-        isChecked={done}
-        onChange={() => handleCheckBox(id)}
-        style={{ width: '20px' }}
-      />
-      <Box textDecoration={done ? 'line-through' : 'none'}>{description}</Box>
+    <Box __css={themes} width={'380px'}>
+      <Box flex="1 1 0">
+        <CheckBox isChecked={done} onChange={() => handleCheckBox(id)} />
+      </Box>
+      <Box
+        textDecoration={done ? 'line-through' : 'none'}
+        padding={4}
+        flex="8 1 0"
+        wordBreak={'break-word'}
+      >
+        {description}
+      </Box>
       <CustomButton
         onClick={() => handleDelete(id, description, done)}
         size="sm"
-        width={20}
+        flex="1 1 0"
       >
         완료
       </CustomButton>
